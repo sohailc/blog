@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block main %}
+<h2>Latest Posts</h2>
+<ul class="post-list">
+{% for post in posts %}
+<li>
+<a href="{{ base }}/posts/{{ post.slug }}/index.html">{{ post.title }}</a>
+<span class="muted">— {{ post.date }}</span>
+</li>
+{% endfor %}
+</ul>
+{% endblock %}

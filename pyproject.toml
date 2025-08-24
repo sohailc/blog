@@ -1,0 +1,14 @@
+[project]
+name = "json-blog"
+version = "0.1.0"
+requires-python = ">=3.12"
+
+dependencies = [
+    "Jinja2==3.1.4",
+    "jsonschema==4.22.0",
+    "markdown==3.7"
+]
+
+[tool.uv]
+# optional: pin resolver mode
+

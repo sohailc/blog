@@ -1,0 +1,9 @@
+{
+    "title": "Sohail’s Blog",
+    "description": "Data/physics/dev notes.",
+    "base_url": "https://sohailc.github.io/blog",
+    "nav": [
+        {"label": "Home", "href": "/"},
+        {"label": "About", "href": "/about.html"}
+    ]
+}

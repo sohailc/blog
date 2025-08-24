@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{ title }} — {{ site.title }}</title>
+<meta name="description" content="{{ site.description }}">
+<link rel="stylesheet" href="{{ base }}/static/styles.css">
+<link rel="alternate" type="application/rss+xml" href="{{ base }}/feed.xml" title="{{ site.title }}">
+</head>
+<body>
+<header class="site-header">
+<h1><a href="{{ base }}/">{{ site.title }}</a></h1>
+<nav>
+{% for item in site.nav %}
+<a href="{{ base ~ item.href }}">{{ item.label }}</a>
+{% endfor %}
+</nav>
+</header>
+
+
+<main>
+{% block main %}{% endblock %}
+</main>
+
+
+<footer class="site-footer">
+<p>© {{ now.year }} {{ site.title }}</p>
+</footer>
+
+
+<!-- Accessible expander behavior -->
+<script>
+document.addEventListener('click', (e)=>{
+const btn = e.target.closest('button.expander');
+if(!btn) return;
+const id = btn.getAttribute('aria-controls');
+const panel = document.getElementById(id);
+const chev = btn.querySelector('.chevron');
+const open = btn.getAttribute('aria-expanded') === 'true';
+btn.setAttribute('aria-expanded', String(!open));
+if(!open){
+panel.hidden = false;
+const h = panel.scrollHeight;
+panel.style.blockSize = '0px';
+requestAnimationFrame(()=> panel.style.blockSize = h+'px');
+if(chev) chev.style.transform = 'rotate(90deg)';
+} else {
+const h = panel.scrollHeight;
+panel.style.blockSize = h+'px';
+requestAnimationFrame(()=> panel.style.blockSize = '0px');
+if(chev) chev.style.transform = 'rotate(0deg)';
+}
+panel.addEventListener('transitionend', ()=>{
+if(btn.getAttribute('aria-expanded') === 'false'){
+panel.hidden = true; panel.style.blockSize='';
+} else panel.style.blockSize='auto';
+}, {once:true});
+});
+</script>
+</body>
+</html>

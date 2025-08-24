@@ -1,0 +1,11 @@
+{
+"slug": "welcome",
+"title": "Welcome to My Blog",
+"date": "2025-08-01",
+"tags": ["intro"],
+"sections": [
+{ "type": "p", "text": "This blog is generated from JSON." },
+{ "type": "expander", "label": "Why JSON?", "content": "I like structured content and portability." },
+{ "type": "p", "text": "More posts coming soon." }
+]
+}
