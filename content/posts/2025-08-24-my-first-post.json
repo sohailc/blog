@@ -1,0 +1,12 @@
+{
+  "slug": "my-first-post",
+  "title": "My First Blog Post",
+  "date": "2025-08-24",
+  "tags": ["intro", "first"],
+  "sections": [
+    { "type": "p", "text": "Hello world! This is my very first blog post on my new JSON-powered site." },
+    { "type": "p", "text": "I built this blog with Python, Jinja2 templates, and GitHub Actions deploying to GitHub Pages." },
+    { "type": "expander", "label": "More thoughts", "content": "This paragraph is hidden until you click the arrow." },
+    { "type": "p", "text": "Thanks for reading! More posts coming soon 🚀." }
+  ]
+}
