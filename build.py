@@ -4,6 +4,7 @@ from datetime import datetime, UTC
 from pathlib import Path
 from xml.sax.saxutils import escape
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+import markdown  # NEW
 
 ROOT = Path(__file__).parent
 CONTENT = ROOT / "content"
@@ -22,16 +23,38 @@ def write(path: Path, text: str):
     path.write_text(text, encoding="utf-8")
 
 
+def render_markdown(md_path: Path) -> str:
+    text = md_path.read_text(encoding="utf-8")
+    return markdown.markdown(text, extensions=[])  # add extensions if you want
+
+
+def load_section(post_dir: Path, section: dict) -> dict:
+    """Normalize section dicts. Supports:
+       - {"type":"markdown","file":"para1.md"} -> {"type":"html","html":"<p>...</p>"}
+       - {"type":"expander","label":"...","file":"extra.md"} -> {"type":"expander_html","label":"...","html":"<p>...</p>"}
+       - {"type":"p","text":"..."} (unchanged, for old JSON)
+    """
+    stype = section.get("type")
+    if stype == "markdown":
+        html = render_markdown(post_dir / section["file"])
+        return {"type": "html", "html": html}
+    if stype == "expander":
+        html = render_markdown(post_dir / section["file"]) if "file" in section else escape(section.get("content", ""))
+        return {"type": "expander_html", "label": section.get("label", "More"), "html": html}
+    return section
+
+
 def gen_rss(site, posts):
-    """Generate a minimal RSS feed from posts."""
     base = site.get("base_url", "").rstrip("/")
     items = []
     for post in posts:
         url = f"{base}/posts/{post['slug']}/"
+        # try to grab a textual summary from first section if possible
         desc = ""
         if post.get("sections"):
             first = post["sections"][0]
-            desc = first.get("text", "") if first.get("type") == "p" else ""
+            if first.get("type") == "p":
+                desc = first.get("text", "")
         items.append(
             f"<item><title>{escape(post['title'])}</title>"
             f"<link>{escape(url)}</link>"
@@ -39,7 +62,6 @@ def gen_rss(site, posts):
             f"<pubDate>{post['date']}</pubDate>"
             f"<description>{escape(desc)}</description></item>"
         )
-
     rss = (
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
         f"<rss version=\"2.0\"><channel><title>{site['title']}</title>"
@@ -51,13 +73,11 @@ def gen_rss(site, posts):
 
 
 def gen_sitemap(site, posts):
-    """Generate a sitemap.xml for SEO."""
     base = site.get("base_url", "").rstrip("/")
     urls = [f"{base}/"]
     if (CONTENT / "about.json").exists():
         urls.append(f"{base}/about.html")
     urls += [f"{base}/posts/{p['slug']}/" for p in posts]
-
     body = "".join([f"<url><loc>{u}</loc></url>" for u in urls])
     xml = (
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
@@ -69,7 +89,6 @@ def gen_sitemap(site, posts):
 
 
 def build():
-    """Main build pipeline: copy assets, render templates, emit dist/."""
     if OUT.exists():
         shutil.rmtree(OUT)
     OUT.mkdir(parents=True)
@@ -87,12 +106,27 @@ def build():
     if STATIC.exists():
         shutil.copytree(STATIC, OUT / "static")
 
-    # Load posts
+    # Load posts (support both flat .json files and per-post folders with post.json)
     posts = []
-    for p in sorted((CONTENT / "posts").glob("*.json")):
+    posts_dir = CONTENT / "posts"
+
+    # 1) Per-post folders with post.json
+    for post_json in sorted(posts_dir.glob("*/post.json")):
+        post = load_json(post_json)
+        if post.get("draft"):
+            continue
+        post_dir = post_json.parent
+        post["sections"] = [load_section(post_dir, s) for s in post.get("sections", [])]
+        posts.append(post)
+
+    # 2) Back-compat: flat files like content/posts/*.json
+    for p in sorted(posts_dir.glob("*.json")):
+        if p.name == "post.json":
+            continue
         post = load_json(p)
         if post.get("draft"):
             continue
+        # sections may reference no files here; keep as-is
         posts.append(post)
 
     # Render index
@@ -107,7 +141,7 @@ def build():
             tmpl_post.render(title=post["title"], post=post),
         )
 
-    # Optional: About page
+    # Optional: About page (still JSON for now)
     about_src = CONTENT / "about.json"
     if about_src.exists():
         about = load_json(about_src)
@@ -117,7 +151,7 @@ def build():
     gen_rss(site, posts)
     gen_sitemap(site, posts)
 
-    # Optional: custom domain CNAME
+    # Optional custom domain
     cname = site.get("cname")
     if cname:
         write(OUT / "CNAME", cname.strip() + "\n")
