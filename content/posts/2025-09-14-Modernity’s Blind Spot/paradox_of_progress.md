@@ -1,14 +1,8 @@
 # Chapter I. Introduction: The Paradox of Progress
 
-Despite centuries of progress, modernity has not fully taken root in the human psyche. 
-Even in highly secular societies, forms of magical thinking and conspiratorial beliefs 
-enjoy wide resonance. Alarmingly, diseases once controlled - such as measles - are 
-resurging: the U.S. has recorded over 1,300 cases in 2025, the highest since the early 
-1990s [1](https://people.com/measles-cases-at-record-high-since-being-eliminated-in-2000-11768617), 
-while Europe saw a more than doubling of cases between 2023 and 2024 [2](https://www.ft.com/content/bfbc8afc-111d-4975-9381-0fc69ccd7b0f). 
-At the same time, despite a scientific consensus exceeding 97\% [3](https://en.wikipedia.org/wiki/Scientific_consensus_on_climate_change), 
-a significant minority - around one in four people in the U.S. - still dismiss the reality of 
-human-caused climate change as a hoax [4](https://misinforeview.hks.harvard.edu/article/understanding-climate-change-conspiracy-beliefs-a-comparative-outlook).
+Modernity’s great promise—a peaceful world built on rational order—has faltered. Instead of harmony, we find malaise, and at times outright malice, driving us toward self-destruction. From climate collapse and genocide to an America straining under partisan fracture, something essential has gone wrong. Is there something in modernity’s very foundations that has brought us here, or are we grappling with the lingering vestiges of pre-modern thinking that may yet prove to be our undoing? In this essay, I will argue that both forces are at play: modernity’s own blind spots and the lingering grip of pre-modern ways of thinking together help explain our present condition.
+
+Despite centuries of progress, modernity has not fully taken root in the human psyche. Even in highly secular societies, forms of magical thinking and conspiratorial beliefs enjoy wide resonance. Alarmingly, diseases once controlled - such as measles - are resurging: the U.S. has recorded over 1,300 cases in 2025, the highest since the early 1990s [1](https://people.com/measles-cases-at-record-high-since-being-eliminated-in-2000-11768617), while Europe saw a more than doubling of cases between 2023 and 2024 [2](https://www.ft.com/content/bfbc8afc-111d-4975-9381-0fc69ccd7b0f). At the same time, despite a scientific consensus exceeding 97% [3](https://en.wikipedia.org/wiki/Scientific_consensus_on_climate_change), a significant minority - around one in four people in the U.S. - still dismiss the reality of human-caused climate change as a hoax [4](https://misinforeview.hks.harvard.edu/articleunderstanding-climate-change-conspiracy-beliefs-a-comparative-outlook).
 
 One common explanation holds that this resistance stems from our evolutionary wiring: that 
 primitive parts of the brain - like the amygdala - process threats and beliefs via fast, 
