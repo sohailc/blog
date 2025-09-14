@@ -1,54 +1,20 @@
 # Chapter I. Introduction: The Paradox of Progress
 
-Modernity’s great promise—a peaceful world built on rational order—has faltered. Instead of harmony, we find malaise, and at times outright malice, driving us toward self-destruction. From climate collapse and genocide to an America straining under partisan fracture, something essential has gone wrong. Is there something in modernity’s very foundations that has brought us here, or are we grappling with the lingering vestiges of pre-modern thinking that may yet prove to be our undoing? In this essay, I will argue that both forces are at play: modernity’s own blind spots and the lingering grip of pre-modern ways of thinking together help explain our present condition.
+Modernity’s great promise—a peaceful world built on rational order—has faltered. Instead of harmony, we find malaise, and at times outright malice, driving us toward self-destruction. From climate collapse and genocide to an America straining under partisan fracture, something essential has gone wrong. Is there something in modernity’s very foundations that has brought us here, or are we grappling with the lingering vestiges of pre-modern thinking that may yet prove to be our undoing? In this essay, I will argue that both forces are at play: modernity’s own blind spots and the lingering grip of pre-modern ways of thinking together help explain our present condition. Yes, modernity is sometimes rejected — but that rejection is itself one of modernity’s own failings.
 
 Despite centuries of progress, modernity has not fully taken root in the human psyche. Even in highly secular societies, forms of magical thinking and conspiratorial beliefs enjoy wide resonance. Alarmingly, diseases once controlled - such as measles - are resurging: the U.S. has recorded over 1,300 cases in 2025, the highest since the early 1990s [1](https://people.com/measles-cases-at-record-high-since-being-eliminated-in-2000-11768617), while Europe saw a more than doubling of cases between 2023 and 2024 [2](https://www.ft.com/content/bfbc8afc-111d-4975-9381-0fc69ccd7b0f). At the same time, despite a scientific consensus exceeding 97% [3](https://en.wikipedia.org/wiki/Scientific_consensus_on_climate_change), a significant minority - around one in four people in the U.S. - still dismiss the reality of human-caused climate change as a hoax [4](https://misinforeview.hks.harvard.edu/articleunderstanding-climate-change-conspiracy-beliefs-a-comparative-outlook).
 
-One common explanation holds that this resistance stems from our evolutionary wiring: that 
-primitive parts of the brain - like the amygdala - process threats and beliefs via fast, 
-emotional heuristics that often bypass rational thinking, making it hard to absorb abstract 
-scientific concepts [5](https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow). This is 
-supported by "mismatch theory", which suggests our Stone Age cognitive architecture is poorly 
-adapted to the demands of complex, modern life [6](https://en.wikipedia.org/wiki/Evolutionary_mismatch). 
-Yet this explains only part of the story. 
+One common explanation holds that this resistance stems from our evolutionary wiring: that primitive parts of the brain - like the amygdala - process threats and beliefs via fast, emotional heuristics that often bypass rational thinking, making it hard to absorb abstract scientific concepts [5](https://en.wikipedia.org/wiki/Thinking,_Fast_and_Slow). This is supported by "mismatch theory", which suggests our Stone Age cognitive architecture is poorly adapted to the demands of complex, modern life [6](https://en.wikipedia.org/wiki/Evolutionary_mismatch). Yet this explains only part of the story. 
 
-To gain a fuller picture, let's consider India at the turn of the 20th century. The British had 
-installed railroads and telegraph lines - modern marvels of engineering - emblematic of 
-industrial progress. Yet many indigenous Indians initially met these innovations with 
-suspicion. Some feared they were a form of sorcery. Others, more accurately, feared them as 
-instruments of colonial control, and not without reason. The new infrastructure was used 
-primarily to transport soldiers and gather intelligence in the event of uprisings.
+To gain a fuller picture, let's consider India at the turn of the 20th century. The British had installed railroads and telegraph lines - modern marvels of engineering - emblematic of industrial progress. Yet many indigenous Indians initially met these innovations with suspicion. Some feared they were a form of sorcery. Others, more accurately, feared them as instruments of colonial control, and not without reason. The new infrastructure was used primarily to transport soldiers and gather intelligence in the event of uprisings.
 
-This early ambivalence toward modern technology - caught between awe and mistrust - finds 
-parallels in our own time. Consider the introduction of 5G networks and the anxieties 
-surrounding microwave radiation, or the backlash against genetically modified foods and 
-vaccinations. These fears are not solely rooted in science or pseudoscience; they reflect 
-deeper discomforts. Many people instinctively prefer what seems "natural" over what is 
-synthetic, and they often view the institutions advancing such technologies as opaque, 
-profit-driven, or even exploitative.
+This early ambivalence toward modern technology - caught between awe and mistrust - finds parallels in our own time. Consider the introduction of 5G networks and the anxieties surrounding microwave radiation, or the backlash against genetically modified foods and vaccinations. These fears are not solely rooted in science or pseudoscience; they reflect deeper discomforts. Many people instinctively prefer what seems "natural" over what is synthetic, and they often view the institutions advancing such technologies as opaque, profit-driven, or even exploitative.
 
-The heart of the issue lies in how modernity conceptualizes human beings: as autonomous, 
-self-interested actors. This framing is not merely descriptive, it becomes embedded in policy, 
-culture, and institutional design, shaping the systems we inhabit. These systems often 
-prioritize profit, efficiency, and short-term gain above all else. In doing so, they create 
-structures that feel exploitative and alienating, prompting people, consciously or not, to 
-reject them.
+The heart of the issue lies in how modernity conceptualizes human beings: as autonomous, self-interested actors. This framing is not merely descriptive, it becomes embedded in policy, culture, and institutional design, shaping the systems we inhabit. These systems often prioritize profit, efficiency, and short-term gain above all else. In doing so, they create structures that feel exploitative and alienating, prompting people, consciously or not, to reject them.
 
-Such rejection is not always the product of misunderstanding or cognitive limitation. Just 
-as many in colonial India distrusted railroads and telegraphs because they correctly perceived 
-them as tools of domination, people today may resist modern institutions not out of ignorance, 
-but because they recognize - at least intuitively - that those systems often serve narrow interests 
-rather than the common good.
+Such rejection is not always the product of misunderstanding or cognitive limitation. Just as many in colonial India distrusted railroads and telegraphs because they correctly perceived them as tools of domination, people today may resist modern institutions not out of ignorance, but because they recognize - at least intuitively - that those systems often serve narrow interests rather than the common good.
 
-This intuition is not unfounded. It is rarely that technologies like vaccines are themselves 
-part of a nefarious agenda; rather, mistrust grows when the institutions promoting them engage 
-in practices - such as predatory pricing or opaque decision-making - that signal self-interest over 
-public welfare. When we design our institutions around the assumption that people are driven 
-solely by self-interest, should we be surprised when they foster narcissism, alienation, and 
-leaders who embody those same values?
+This intuition is not unfounded. It is rarely that technologies like vaccines are themselves part of a nefarious agenda; rather, mistrust grows when the institutions promoting them engage in practices - such as predatory pricing or opaque decision-making - that signal self-interest over public welfare. When we design our institutions around the assumption that people are driven solely by self-interest, should we be surprised when they foster narcissism, alienation, and leaders who embody those same values?
 
-These ideas, the connection between modernity, technology, exploitation, and dominance will be 
-explored throughout this essay. This is not a rejection of modernity. Modernity has brought 
-immense progress. But without self-reflection and reform, we risk losing the very gains it has 
-delivered.
+These ideas, the connection between modernity, technology, exploitation, and dominance will be explored throughout this essay. This is not a rejection of modernity. Modernity has brought immense progress. But without self-reflection and reform, we risk losing the very gains it has delivered.
 
