@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block main %}
 
-<!-- 3-column page grid: left gutter · main text · right margin -->
+<!-- 3-column page grid: left margin · main text · right margin -->
 <div class="page-grid">
 
-  {# ---- Optional per-post watermark images (from post.margin_images) ---- #}
+  {# ---- Page-level watermark illustrations (decorative; absolute) ---- #}
   {% if post.margin_images %}
     {% for img in post.margin_images %}
-      <aside class="marginalia watermark-{{ img.side|e }}">
+      <aside class="watermark-{{ img.side|e }}" style="--wm-top: {{ img.top or '0' }};">
         <img src="{{ base }}/static/{{ img.src|e }}" alt="{{ img.alt or '' }}">
       </aside>
     {% endfor %}
@@ -28,7 +28,7 @@
     {% if s.type == "p" %}
       <p class="article">{{ s.text }}</p>
 
-    {# HTML content (e.g., Markdown rendered in build.py) #}
+    {# HTML content (Markdown rendered in build.py) #}
     {% elif s.type == "html" %}
       <div class="article">{{ s.html | safe }}</div>
 
@@ -53,23 +53,34 @@
       <div id="{{ id }}" class="expando article" hidden>
         <p>{{ s.content }}</p>
       </div>
-
-    {# Margin note (plain text) #}
-    {% elif s.type == "note" %}
-      <aside class="marginalia marginalia--box">{{ s.text }}</aside>
-
-    {# Margin note (pre-rendered HTML) #}
-    {% elif s.type == "note_html" %}
-      <aside class="marginalia marginalia--box">{{ s.html | safe }}</aside>
-
-    {# Margin image tied to a specific spot in the flow #}
-    {% elif s.type == "note_image" %}
-      <aside class="marginalia">
-        {% if s.caption %}<div class="marginalia--box">{{ s.caption }}</div>{% endif %}
-        <img src="{{ base }}/static/{{ s.src|e }}" alt="{{ s.alt or '' }}">
-      </aside>
-
     {% endif %}
+
+    {# ---- Per-section margin images (left/right) ---- #}
+    {% if s.left_margin_image %}
+      <aside class="marginalia marginalia-left">
+        {% if s.left_margin_caption %}
+          <div class="marginalia--box">{{ s.left_margin_caption }}</div>
+        {% endif %}
+        <img src="{{ base }}/static/{{ s.left_margin_image|e }}" alt="{{ s.left_margin_alt or '' }}">
+      </aside>
+    {% endif %}
+
+    {% if s.right_margin_image %}
+      <aside class="marginalia marginalia-right">
+        {% if s.right_margin_caption %}
+          <div class="marginalia--box">{{ s.right_margin_caption }}</div>
+        {% endif %}
+        <img src="{{ base }}/static/{{ s.right_margin_image|e }}" alt="{{ s.right_margin_alt or '' }}">
+      </aside>
+    {% endif %}
+
+    {# ---- Per-section margin notes as HTML (optional) ---- #}
+    {% if s.note_html %}
+      <aside class="marginalia marginalia-right">
+        <div class="marginalia--box">{{ s.note_html | safe }}</div>
+      </aside>
+    {% endif %}
+
   {% endfor %}
 </div>
 
