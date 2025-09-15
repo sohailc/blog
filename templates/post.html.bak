@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block main %}
+
+<!-- 3-column page grid: left gutter · main text · right margin -->
+<div class="page-grid">
+
+  {# ---- Optional per-post watermark images (from post.margin_images) ---- #}
+  {% if post.margin_images %}
+    {% for img in post.margin_images %}
+      <aside class="marginalia watermark-{{ img.side|e }}">
+        <img src="{{ base }}/static/{{ img.src|e }}" alt="{{ img.alt or '' }}">
+      </aside>
+    {% endfor %}
+  {% endif %}
+
+  {# ---- Title & meta ---- #}
+  <header class="article header-span-2">
+    <h1>{{ post.title }}</h1>
+    <p class="muted">
+      {{ post.date }}{% if post.tags %} · {{ post.tags|join(", ") }}{% endif %}
+    </p>
+  </header>
+
+  {# ---- Sections ---- #}
+  {% for s in post.sections %}
+
+    {# Plain paragraph text #}
+    {% if s.type == "p" %}
+      <p class="article">{{ s.text }}</p>
+
+    {# HTML content (e.g., Markdown rendered in build.py) #}
+    {% elif s.type == "html" %}
+      <div class="article">{{ s.html | safe }}</div>
+
+    {# Expander with HTML content (Markdown) #}
+    {% elif s.type == "expander_html" %}
+      {% set id = "exp-" ~ loop.index %}
+      <button class="expander article" aria-expanded="false" aria-controls="{{ id }}">
+        <span class="chevron" aria-hidden="true">▸</span>
+        <span class="sr-only">{{ s.label or "Show more" }}</span>
+      </button>
+      <div id="{{ id }}" class="expando article" hidden>
+        {{ s.html | safe }}
+      </div>
+
+    {# Back-compat: expander with plain text #}
+    {% elif s.type == "expander" %}
+      {% set id = "exp-" ~ loop.index %}
+      <button class="expander article" aria-expanded="false" aria-controls="{{ id }}">
+        <span class="chevron" aria-hidden="true">▸</span>
+        <span class="sr-only">{{ s.label or "Show more" }}</span>
+      </button>
+      <div id="{{ id }}" class="expando article" hidden>
+        <p>{{ s.content }}</p>
+      </div>
+
+    {# Margin note (plain text) #}
+    {% elif s.type == "note" %}
+      <aside class="marginalia marginalia--box">{{ s.text }}</aside>
+
+    {# Margin note (pre-rendered HTML) #}
+    {% elif s.type == "note_html" %}
+      <aside class="marginalia marginalia--box">{{ s.html | safe }}</aside>
+
+    {# Margin image tied to a specific spot in the flow #}
+    {% elif s.type == "note_image" %}
+      <aside class="marginalia">
+        {% if s.caption %}<div class="marginalia--box">{{ s.caption }}</div>{% endif %}
+        <img src="{{ base }}/static/{{ s.src|e }}" alt="{{ s.alt or '' }}">
+      </aside>
+
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% endblock %}
