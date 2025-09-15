@@ -29,19 +29,34 @@ def render_markdown(md_path: Path) -> str:
 
 
 def load_section(post_dir: Path, section: dict) -> dict:
-    """Normalize section dicts. Supports:
-       - {"type":"markdown","file":"para1.md"} -> {"type":"html","html":"<p>...</p>"}
-       - {"type":"expander","label":"...","file":"extra.md"} -> {"type":"expander_html","label":"...","html":"<p>...</p>"}
-       - {"type":"p","text":"..."} (unchanged, for old JSON)
-    """
+    """Normalize section dicts and PRESERVE extra fields (margin images, captions)."""
     stype = section.get("type")
+
+    def keep_extras(dst: dict):
+        extras = (
+            "left_margin_image", "left_margin_alt", "left_margin_caption",
+            "right_margin_image", "right_margin_alt", "right_margin_caption",
+            "note_html"  # if you ever pre-render notes
+        )
+        for k in extras:
+            if k in section:
+                dst[k] = section[k]
+        return dst
+
     if stype == "markdown":
         html = render_markdown(post_dir / section["file"])
-        return {"type": "html", "html": html}
+        return keep_extras({"type": "html", "html": html})
+
     if stype == "expander":
-        html = render_markdown(post_dir / section["file"]) if "file" in section else escape(section.get("content", ""))
-        return {"type": "expander_html", "label": section.get("label", "More"), "html": html}
-    return section
+        # Support expander with markdown file OR plain text content
+        if "file" in section:
+            html = render_markdown(post_dir / section["file"])
+            return keep_extras({"type": "expander_html", "label": section.get("label", "More"), "html": html})
+        else:
+            return keep_extras(section)
+
+    # pass-through for other types (e.g., 'p', already 'html', notes, etc.)
+    return keep_extras(section)
 
 
 def gen_rss(site, posts):
