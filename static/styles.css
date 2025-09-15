@@ -74,7 +74,7 @@ main {
    ========================= */
 .page-grid{
   display: grid;
-  grid-template-columns: 1fr min(var(--maxw), 100%) var(--margin-col);
+  grid-template-columns: var(--margin-col) min(var(--maxw), 100%) var(--margin-col);
   gap: var(--gutter);
   align-items: start;
 }
