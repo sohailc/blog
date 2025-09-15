@@ -4,7 +4,7 @@
   "date": "2025-09-15",
   "tags": ["introduction"],
   "sections": [
-    { "type": "markdown", "file": "paradox_of_progress.md", "left_margin_image": "locomotive.png"}
+    { "type": "markdown", "file": "paradox_of_progress.md", "left_margin_image": "locomotive.png", "left_margin_caption": "Progress, with a plume."}
   ]
 }
 
