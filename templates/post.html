@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block main %}
 
+{# =========================================
+   Title area
+   - If hero_background is present, show a banner with the title.
+   - Otherwise, render the title in a normal page grid.
+   ========================================= #}
 {% if post.hero_background %}
   <div class="hero-bg hero-fade"
        style="--hero-img: url('{{ base }}/static/{{ post.hero_background.src | e }}');
@@ -30,11 +35,32 @@
     </div> <!-- /.hero-content -->
 
   </div> <!-- /.hero-bg -->
+{% else %}
+  <div class="page-grid">
+    {% if post.margin_images %}
+      {% for img in post.margin_images %}
+        <aside class="watermark-{{ img.side|e }}" style="--wm-top: {{ img.top or '0' }};">
+          <img src="{{ base }}/static/{{ img.src|e }}" alt="{{ img.alt or '' }}">
+        </aside>
+      {% endfor %}
+    {% endif %}
+
+    <header class="article header-span-2">
+      <h1>{{ post.title }}</h1>
+      <p class="muted">
+        {{ post.date }}{% if post.tags %} · {{ post.tags|join(", ") }}{% endif %}
+      </p>
+    </header>
+  </div>
 {% endif %}
 
+{# =========================================
+   Sections: each inside its own 3-col row grid
+   ========================================= #}
 {% for s in post.sections %}
   <section class="row-grid">
 
+    {# ---- Left margin (per-section image/note) ---- #}
     {% if s.left_margin_image %}
       <aside class="marginalia row-left">
         {% if s.left_margin_caption %}
@@ -52,10 +78,13 @@
       </aside>
     {% endif %}
 
+    {# ---- Main column: the section content ---- #}
     {% if s.type == "p" %}
       <p class="row-main">{{ s.text }}</p>
+
     {% elif s.type == "html" %}
       <div class="row-main">{{ s.html | safe }}</div>
+
     {% elif s.type == "expander_html" %}
       {% set id = "exp-" ~ loop.index %}
       <div class="row-main">
@@ -67,6 +96,7 @@
           {{ s.html | safe }}
         </div>
       </div>
+
     {% elif s.type == "expander" %}
       {% set id = "exp-" ~ loop.index %}
       <div class="row-main">
@@ -80,6 +110,7 @@
       </div>
     {% endif %}
 
+    {# ---- Right margin (per-section image/note) ---- #}
     {% if s.right_margin_image %}
       <aside class="marginalia row-right">
         {% if s.right_margin_caption %}

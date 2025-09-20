@@ -157,7 +157,7 @@ main {
 .article, .header-span-2 { position: relative; z-index: 1; }
 
 /* =========================
-   Hero background banner
+   Hero background banner (optional)
    ========================= */
 .hero-bg{
   position: relative;
