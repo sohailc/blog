@@ -70,7 +70,7 @@ main {
 }
 
 /* =========================
-   Page grid (title + page-level watermarks)
+   Page grid (general content)
    ========================= */
 .page-grid{
   position: relative; /* for absolute watermarks */
@@ -96,7 +96,7 @@ main {
   grid-template-columns: var(--margin-col) min(var(--maxw), 100%) var(--margin-col);
   gap: var(--gutter);
   align-items: start;
-  margin: 0 0 0.5rem; /* tiny vertical rhythm */
+  margin: 0 0 0.5rem; /* subtle vertical rhythm */
 }
 
 /* Center column for section content */
@@ -158,6 +158,38 @@ main {
 .article, .header-span-2 { position: relative; z-index: 1; }
 
 /* =========================
+   Hero background banner (TOP ONLY)
+   Wraps the title area; shows once; doesn't repeat down page.
+   ========================= */
+.hero-bg{
+  position: relative;
+  isolation: isolate;   /* keep z-layers contained */
+  max-height: 60vh;     /* tune banner height; try 40rem if you prefer fixed */
+  overflow: hidden;     /* hide overflow so image doesn't keep going */
+}
+/* image layer */
+.hero-bg::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--hero-img);
+  background-repeat: no-repeat;
+  background-size: contain;                 /* show the whole pano */
+  background-position: var(--hero-pos, left top);
+  opacity: var(--hero-opacity, .22);
+  z-index: 0;
+  pointer-events: none;
+}
+/* Fade panel behind title text for legibility */
+.hero-fade .article{
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,0.78);
+  border-radius: 8px;
+  padding: .5rem .75rem;
+}
+
+/* =========================
    Responsive behavior
    ========================= */
 @media (max-width: 1200px){
@@ -180,6 +212,10 @@ main {
 
   /* Hide big page-level watermarks on small screens */
   .watermark-left, .watermark-right { display: none; }
+
+  /* Soften hero a bit on mobile */
+  .hero-bg::before{ opacity: .16; background-position: center top; }
+  .hero-fade .article{ background: rgba(255,255,255,0.86); }
 }
 
 /* =========================
@@ -187,48 +223,3 @@ main {
    ========================= */
 .row-main p { margin: 1rem 0; }
 .row-main h1, .row-main h2, .row-main h3 { line-height: 1.25; margin: 1.2em 0 .6em; }
-/* =========================
-   Hero background (full-width, faint)
-   ========================= */
-.hero-bg{
-  position: relative;
-  isolation: isolate;         /* keep z-layers contained */
-}
-
-/* The image layer */
-.hero-bg::before{
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: var(--hero-img);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: var(--hero-pos, center top);
-  opacity: var(--hero-opacity, .22);
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Fade only beneath text columns so readability stays high */
-.hero-fade .article,
-.hero-fade .row-main{
-  position: relative;
-  z-index: 1;
-  background: rgba(255,255,255,0.78);  /* adjust to taste */
-  border-radius: 8px;
-  padding: .5rem .75rem;               /* subtle cushion so text doesn't hug edges */
-}
-
-/* Optional: let the watermark page-level art still show behind text */
-.hero-fade .watermark-left,
-.hero-fade .watermark-right{
-  z-index: 0;
-}
-
-/* Mobile: you can soften or disable the hero if needed */
-@media (max-width: 900px){
-  .hero-bg::before{ opacity: .16; background-position: center; }
-  .hero-fade .article, .hero-fade .row-main{
-    background: rgba(255,255,255,0.86);
-  }
-}
