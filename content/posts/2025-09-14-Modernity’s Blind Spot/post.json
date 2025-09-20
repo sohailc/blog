@@ -3,13 +3,6 @@
   "title": "Modernity's Blind Spot: Why Meaning Matters in Public Life",
   "date": "2025-09-15",
   "tags": ["introduction"],
-
-  "hero_background": {
-    "src": "train-city-landscape.png",   
-    "opacity": 0.22,                     
-    "position": "left top"               
-  },
-
   "sections": [
     {
       "type": "markdown",
