@@ -1,47 +1,40 @@
 {% extends "base.html" %}
 {% block main %}
 
-{# =========================================
-   Optional hero background banner (TOP ONLY)
-   Wraps the title area so the image shows once.
-   ========================================= #}
 {% if post.hero_background %}
   <div class="hero-bg hero-fade"
        style="--hero-img: url('{{ base }}/static/{{ post.hero_background.src | e }}');
               --hero-opacity: {{ post.hero_background.opacity or '0.22' }};
-              --hero-pos: {{ (post.hero_background.position or 'left top') | e }};">
+              --hero-pos: {{ (post.hero_background.position or 'left center') | e }};
+              --hero-ar: {{ post.hero_background.aspect_ratio or '3/1' }};">
+
+    <div class="hero-content">
+      <div class="page-grid">
+
+        {% if post.margin_images %}
+          {% for img in post.margin_images %}
+            <aside class="watermark-{{ img.side|e }}" style="--wm-top: {{ img.top or '0' }};">
+              <img src="{{ base }}/static/{{ img.src|e }}" alt="{{ img.alt or '' }}">
+            </aside>
+          {% endfor %}
+        {% endif %}
+
+        <header class="article header-span-2">
+          <h1>{{ post.title }}</h1>
+          <p class="muted">
+            {{ post.date }}{% if post.tags %} · {{ post.tags|join(", ") }}{% endif %}
+          </p>
+        </header>
+
+      </div>
+    </div> <!-- /.hero-content -->
+
+  </div> <!-- /.hero-bg -->
 {% endif %}
 
-  {# ---- Title grid (you can include page-level watermarks here if you want them over the banner) ---- #}
-  <div class="page-grid">
-
-    {% if post.margin_images %}
-      {% for img in post.margin_images %}
-        <aside class="watermark-{{ img.side|e }}" style="--wm-top: {{ img.top or '0' }};">
-          <img src="{{ base }}/static/{{ img.src|e }}" alt="{{ img.alt or '' }}">
-        </aside>
-      {% endfor %}
-    {% endif %}
-
-    <header class="article header-span-2">
-      <h1>{{ post.title }}</h1>
-      <p class="muted">
-        {{ post.date }}{% if post.tags %} · {{ post.tags|join(", ") }}{% endif %}
-      </p>
-    </header>
-  </div>
-
-{% if post.hero_background %}
-  </div> {# close .hero-bg after the title banner #}
-{% endif %}
-
-{# =========================================
-   Sections: each inside its own 3-col row grid
-   ========================================= #}
 {% for s in post.sections %}
   <section class="row-grid">
 
-    {# ---- Left margin (per-section image/note) ---- #}
     {% if s.left_margin_image %}
       <aside class="marginalia row-left">
         {% if s.left_margin_caption %}
@@ -59,13 +52,10 @@
       </aside>
     {% endif %}
 
-    {# ---- Main column: the section content ---- #}
     {% if s.type == "p" %}
       <p class="row-main">{{ s.text }}</p>
-
     {% elif s.type == "html" %}
       <div class="row-main">{{ s.html | safe }}</div>
-
     {% elif s.type == "expander_html" %}
       {% set id = "exp-" ~ loop.index %}
       <div class="row-main">
@@ -77,7 +67,6 @@
           {{ s.html | safe }}
         </div>
       </div>
-
     {% elif s.type == "expander" %}
       {% set id = "exp-" ~ loop.index %}
       <div class="row-main">
@@ -91,7 +80,6 @@
       </div>
     {% endif %}
 
-    {# ---- Right margin (per-section image/note) ---- #}
     {% if s.right_margin_image %}
       <aside class="marginalia row-right">
         {% if s.right_margin_caption %}
