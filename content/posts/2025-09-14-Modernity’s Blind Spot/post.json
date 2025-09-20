@@ -1,16 +1,19 @@
 {
-  "slug": "Modernity's Blind Spot",
+  "slug": "modernitys-blind-spot",
   "title": "Modernity's Blind Spot: Why Meaning Matters in Public Life",
   "date": "2025-09-15",
   "tags": ["introduction"],
+
+  "hero_background": {
+    "src": "train-city-landscape.png",   
+    "opacity": 0.22,                     
+    "position": "left top"               
+  },
+
   "sections": [
-    { "type": "markdown", 
-      "file": "paradox_of_progress.md", 
-      "left_margin_image": "locomotive.png", 
-      "left_margin_caption": "Progress, with a plume.",
-      "right_margin_image": "city.png", 
-      "right_margin_caption": "Paradox of progress."
+    {
+      "type": "markdown",
+      "file": "paradox_of_progress.md"
     }
   ]
 }
-
