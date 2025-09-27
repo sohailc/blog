@@ -57,10 +57,15 @@ Yet when subjective experience is dismissed as merely private or unprovable, we 
 ## IV.4 Irrational subjectivity
 
 If there is one key takeaway from the previous section, it is this: subjectivity is not the enemy of reason. On the contrary, reason can—and should—serve to ground and clarify subjective experience. When it fails to do so, it leaves behind a vacuum, one that is all too often filled by irrational thinking. We see this in a variety of cultural phenomena, including:
+
 * Conspiracy theories such as QAnon, 9/11 “inside job” narratives, and anti-vaccine movements
+
 * Pseudoscientific health trends, from anti-GMO activism and extreme dietary ideologies to faith healing and uncritical enthusiasm for alternative medicine
+
 * Skepticism toward public health and climate science, often driven more by ideology than evidence
+
 * Tribalistic thinking, including extreme political partisanship, religious fundamentalism, or even fervent sports fandom that manifests in aggression or hooliganism—where identity and loyalty override reasoned judgment. 
+
 * Pervasiveness of magical thinking, such as believing that positive affirmations alone can manifest reality, or that certain numbers, crystals, or routines hold supernatural influence
 
 Irrationality in these cases is marked not just by a lack of evidence, but by the rejection of available evidence, or by embracing extraordinary claims while neglecting accessible methods of verification. It reflects a breakdown in epistemic discipline—a drift away from critical inquiry and toward emotionally or ideologically driven belief.
