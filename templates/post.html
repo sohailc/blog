@@ -55,10 +55,61 @@
 {% endif %}
 
 {# =========================================
+   Optional Table of Contents
+   Build from sections that include a "title".
+   Disable by setting "toc": false in post.json
+   ========================================= #}
+{% set show_toc = (post.toc is not defined) or (post.toc != false) %}
+{% if show_toc %}
+  {% set toc_items = [] %}
+  {% for s in post.sections if s.title %}
+    {% set raw = s.title %}
+    {% set id = (raw|lower
+                  |replace("’","")
+                  |replace("'","")
+                  |replace(",","")
+                  |replace(".","")
+                  |replace(":","")
+                  |replace(";","")
+                  |replace("&","and")
+                  |replace(" ","-")) %}
+    {% set _ = toc_items.append({'id': id, 'title': s.title}) %}
+  {% endfor %}
+  {% if toc_items|length > 0 %}
+    <nav class="page-grid">
+      <aside class="article header-span-2 toc">
+        <strong>Contents</strong>
+        <ul>
+          {% for item in toc_items %}
+            <li><a href="#{{ item.id }}">{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </aside>
+    </nav>
+  {% endif %}
+{% endif %}
+
+{# =========================================
    Sections: each inside its own 3-col row grid
+   Each "chapter" is just a section with a title + markdown file.
    ========================================= #}
 {% for s in post.sections %}
-  <section class="row-grid">
+  {# Build a stable anchor id for this section if it has a title #}
+  {% if s.title %}
+    {% set sec_id = (s.title|lower
+                      |replace("’","")
+                      |replace("'","")
+                      |replace(",","")
+                      |replace(".","")
+                      |replace(":","")
+                      |replace(";","")
+                      |replace("&","and")
+                      |replace(" ","-")) %}
+  {% else %}
+    {% set sec_id = "section-" ~ loop.index %}
+  {% endif %}
+
+  <section class="row-grid" {% if s.title %}id="{{ sec_id }}"{% endif %}>
 
     {# ---- Left margin (per-section image/note) ---- #}
     {% if s.left_margin_image %}
@@ -79,15 +130,19 @@
     {% endif %}
 
     {# ---- Main column: the section content ---- #}
-    {% if s.type == "p" %}
-      <p class="row-main">{{ s.text }}</p>
+    <div class="row-main">
+      {% if s.title %}
+        <h2 class="chapter-title">{{ s.title }}</h2>
+      {% endif %}
 
-    {% elif s.type == "html" %}
-      <div class="row-main">{{ s.html | safe }}</div>
+      {% if s.type == "p" %}
+        <p>{{ s.text }}</p>
 
-    {% elif s.type == "expander_html" %}
-      {% set id = "exp-" ~ loop.index %}
-      <div class="row-main">
+      {% elif s.type == "html" %}
+        {{ s.html | safe }}
+
+      {% elif s.type == "expander_html" %}
+        {% set id = "exp-" ~ loop.index %}
         <button class="expander" aria-expanded="false" aria-controls="{{ id }}">
           <span class="chevron" aria-hidden="true">▸</span>
           <span class="sr-only">{{ s.label or "Show more" }}</span>
@@ -95,11 +150,9 @@
         <div id="{{ id }}" class="expando" hidden>
           {{ s.html | safe }}
         </div>
-      </div>
 
-    {% elif s.type == "expander" %}
-      {% set id = "exp-" ~ loop.index %}
-      <div class="row-main">
+      {% elif s.type == "expander" %}
+        {% set id = "exp-" ~ loop.index %}
         <button class="expander" aria-expanded="false" aria-controls="{{ id }}">
           <span class="chevron" aria-hidden="true">▸</span>
           <span class="sr-only">{{ s.label or "Show more" }}</span>
@@ -107,8 +160,8 @@
         <div id="{{ id }}" class="expando" hidden>
           <p>{{ s.content }}</p>
         </div>
-      </div>
-    {% endif %}
+      {% endif %}
+    </div>
 
     {# ---- Right margin (per-section image/note) ---- #}
     {% if s.right_margin_image %}
@@ -130,5 +183,32 @@
 
   </section>
 {% endfor %}
+
+{# =========================================
+   Previous / Next navigation (optional)
+   ========================================= #}
+{% set prev_is_obj = post.prev is mapping %}
+{% set next_is_obj = post.next is mapping %}
+{% set prev_slug = (post.prev.slug if prev_is_obj else post.prev) if post.prev else None %}
+{% set next_slug = (post.next.slug if next_is_obj else post.next) if post.next else None %}
+{% set prev_label = (post.prev.label if prev_is_obj and post.prev.label else "← Previous") if prev_slug else None %}
+{% set next_label = (post.next.label if next_is_obj and post.next.label else "Next →") if next_slug else None %}
+
+{% if prev_slug or next_slug %}
+  <nav class="page-grid" aria-label="Post navigation">
+    <div class="article header-span-2 post-nav">
+      <div class="post-nav-left">
+        {% if prev_slug %}
+          <a href="{{ base }}/posts/{{ prev_slug }}/">{{ prev_label }}</a>
+        {% endif %}
+      </div>
+      <div class="post-nav-right">
+        {% if next_slug %}
+          <a href="{{ base }}/posts/{{ next_slug }}/">{{ next_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+{% endif %}
 
 {% endblock %}

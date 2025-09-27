@@ -88,8 +88,6 @@ main {
 
 /* =========================
    Row grid (per-section alignment)
-   Each section renders inside its own 3-col grid,
-   so margin art/notes lock to the top of that section.
    ========================= */
 .row-grid{
   display: grid;
@@ -192,6 +190,32 @@ main {
   border-radius: 8px;
   padding: .5rem .75rem;
 }
+
+/* =========================
+   Table of Contents + Chapter titles + Post nav
+   ========================= */
+.toc{
+  background: #fafafa;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: .75rem 1rem;
+  margin: 0.5rem 0 1rem;
+}
+.toc ul{ margin: .5rem 0 0; padding-left: 1rem; }
+.toc li{ margin: .25rem 0; }
+
+.chapter-title{
+  margin: 1.4rem 0 .6rem;
+  line-height: 1.25;
+  scroll-margin-top: 6rem; /* better anchor scrolling */
+}
+
+.post-nav{
+  display:flex; justify-content:space-between; gap:1rem;
+  padding:1.25rem 0; border-top:1px solid var(--border); margin-top:1.5rem;
+}
+.post-nav a{ text-decoration:none; border-bottom:1px solid transparent; }
+.post-nav a:hover{ border-color: currentColor; }
 
 /* =========================
    Responsive behavior

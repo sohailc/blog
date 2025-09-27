@@ -1,178 +1,177 @@
-import json
-import shutil
-from datetime import datetime, UTC
+#!/usr/bin/env python3
+import json, shutil
 from pathlib import Path
-from xml.sax.saxutils import escape
+from datetime import datetime, timezone
+from typing import Dict, Any, List
+
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-import markdown  # NEW
+import markdown as md
 
-ROOT = Path(__file__).parent
+ROOT = Path(__file__).parent.resolve()
 CONTENT = ROOT / "content"
-TEMPLATES = ROOT / "templates"
+POSTS = CONTENT / "posts"
+DIST = ROOT / "dist"
 STATIC = ROOT / "static"
-OUT = ROOT / "dist"
+TEMPLATES = ROOT / "templates"
 
+# ---------- Utilities ----------
 
-def load_json(p: Path):
-    with p.open("r", encoding="utf-8") as f:
+def read_json(path: Path) -> Dict[str, Any]:
+    with path.open("r", encoding="utf-8") as f:
         return json.load(f)
 
-
-def write(path: Path, text: str):
+def write_text(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text, encoding="utf-8")
+    with path.open("w", encoding="utf-8") as f:
+        f.write(text)
 
+def copy_static():
+    out = DIST / "static"
+    if out.exists():
+        shutil.rmtree(out)
+    shutil.copytree(STATIC, out)
 
-def render_markdown(md_path: Path) -> str:
-    text = md_path.read_text(encoding="utf-8")
-    return markdown.markdown(text, extensions=[])  # add extensions if you want
+def render_markdown(path: Path) -> str:
+    text = path.read_text(encoding="utf-8")
+    return md.markdown(
+        text,
+        extensions=["extra", "sane_lists", "smarty", "toc"]
+    )
 
+# ---------- Section normalization (preserve extras!) ----------
 
-def load_section(post_dir: Path, section: dict) -> dict:
-    """Normalize section dicts and PRESERVE extra fields (margin images, captions)."""
+EXTRA_KEYS = (
+    # per-section margin images/notes
+    "left_margin_image","left_margin_alt","left_margin_caption",
+    "right_margin_image","right_margin_alt","right_margin_caption",
+    "left_note","left_note_html","right_note","right_note_html",
+    # expander label
+    "label",
+    # chapter title (NEW)
+    "title",
+)
+
+def keep_extras(dst: Dict[str, Any], src: Dict[str, Any]) -> Dict[str, Any]:
+    for k in EXTRA_KEYS:
+        if k in src:
+            dst[k] = src[k]
+    return dst
+
+def load_section(post_dir: Path, section: Dict[str, Any]) -> Dict[str, Any]:
     stype = section.get("type")
-
-    def keep_extras(dst: dict):
-        extras = (
-            "left_margin_image", "left_margin_alt", "left_margin_caption",
-            "right_margin_image", "right_margin_alt", "right_margin_caption",
-            "note_html"  # if you ever pre-render notes
-        )
-        for k in extras:
-            if k in section:
-                dst[k] = section[k]
-        return dst
-
     if stype == "markdown":
         html = render_markdown(post_dir / section["file"])
-        return keep_extras({"type": "html", "html": html})
+        return keep_extras({"type": "html", "html": html}, section)
 
     if stype == "expander":
-        # Support expander with markdown file OR plain text content
         if "file" in section:
             html = render_markdown(post_dir / section["file"])
-            return keep_extras({"type": "expander_html", "label": section.get("label", "More"), "html": html})
+            return keep_extras({"type": "expander_html", "label": section.get("label","More"), "html": html}, section)
         else:
-            return keep_extras(section)
+            # plain-text expander passthrough
+            return keep_extras(section, section)
 
-    # pass-through for other types (e.g., 'p', already 'html', notes, etc.)
-    return keep_extras(section)
+    # passthrough other types (already 'html', 'p', etc.)
+    return keep_extras(section, section)
 
+# ---------- Load posts ----------
 
-def gen_rss(site, posts):
-    base = site.get("base_url", "").rstrip("/")
-    items = []
-    for post in posts:
-        url = f"{base}/posts/{post['slug']}/"
-        # try to grab a textual summary from first section if possible
-        desc = ""
-        if post.get("sections"):
-            first = post["sections"][0]
-            if first.get("type") == "p":
-                desc = first.get("text", "")
-        items.append(
-            f"<item><title>{escape(post['title'])}</title>"
-            f"<link>{escape(url)}</link>"
-            f"<guid>{escape(url)}</guid>"
-            f"<pubDate>{post['date']}</pubDate>"
-            f"<description>{escape(desc)}</description></item>"
-        )
-    rss = (
-        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-        f"<rss version=\"2.0\"><channel><title>{site['title']}</title>"
-        f"<link>{base}/</link><description>{site['description']}</description>"
-        + "".join(items)
-        + "</channel></rss>"
-    )
-    write(OUT / "feed.xml", rss)
+def load_site() -> Dict[str, Any]:
+    site_json = CONTENT / "site.json"
+    if site_json.exists():
+        return read_json(site_json)
+    return {
+        "title": "My Blog",
+        "description": "",
+        "base_url": "",
+    }
 
+def load_posts() -> List[Dict[str, Any]]:
+    posts: List[Dict[str, Any]] = []
+    if POSTS.exists():
+        for pdir in sorted(POSTS.iterdir()):
+            if pdir.is_dir() and (pdir / "post.json").exists():
+                post = read_json(pdir / "post.json")
+                # normalize sections
+                sections = []
+                for s in post.get("sections", []):
+                    sections.append(load_section(pdir, s))
+                post["sections"] = sections
+                post["dir"] = pdir
+                posts.append(post)
+    # sort newest first by date if present
+    def _key(p):
+        try:
+            return datetime.fromisoformat(p.get("date", "1970-01-01"))
+        except Exception:
+            return datetime(1970,1,1)
+    posts.sort(key=_key, reverse=True)
+    return posts
 
-def gen_sitemap(site, posts):
-    base = site.get("base_url", "").rstrip("/")
-    urls = [f"{base}/"]
-    if (CONTENT / "about.json").exists():
-        urls.append(f"{base}/about.html")
-    urls += [f"{base}/posts/{p['slug']}/" for p in posts]
-    body = "".join([f"<url><loc>{u}</loc></url>" for u in urls])
-    xml = (
-        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-        "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">"
-        + body
-        + "</urlset>"
-    )
-    write(OUT / "sitemap.xml", xml)
+# ---------- Render ----------
 
-
-def build():
-    if OUT.exists():
-        shutil.rmtree(OUT)
-    OUT.mkdir(parents=True)
-
-    site = load_json(CONTENT / "site.json")
-    base_url = site.get("base_url", "").rstrip("/")
-
+def jinja_env() -> Environment:
     env = Environment(
         loader=FileSystemLoader(str(TEMPLATES)),
-        autoescape=select_autoescape(["html", "xml"]),
+        autoescape=select_autoescape(["html", "xml"])
     )
-    env.globals.update(site=site, base=base_url, now=datetime.now(UTC))
+    return env
 
-    # Copy static assets
-    if STATIC.exists():
-        shutil.copytree(STATIC, OUT / "static")
+def render_post(env: Environment, site: Dict[str, Any], post: Dict[str, Any]):
+    tmpl = env.get_template("post.html")
+    base_url = site.get("base_url","").rstrip("/")
+    ctx = {
+        "site": site,
+        "base": base_url,
+        "post": post,
+        "now": datetime.now(timezone.utc),
+    }
+    html = tmpl.render(**ctx)
+    out = DIST / "posts" / post["slug"] / "index.html"
+    write_text(out, html)
 
-    # Load posts (support both flat .json files and per-post folders with post.json)
-    posts = []
-    posts_dir = CONTENT / "posts"
+def render_index(env: Environment, site: Dict[str, Any], posts: List[Dict[str, Any]]):
+    tmpl = env.get_template("index.html")
+    base_url = site.get("base_url","").rstrip("/")
+    ctx = {
+        "site": site,
+        "base": base_url,
+        "posts": posts,
+        "now": datetime.now(timezone.utc),
+    }
+    html = tmpl.render(**ctx)
+    out = DIST / "index.html"
+    write_text(out, html)
 
-    # 1) Per-post folders with post.json
-    for post_json in sorted(posts_dir.glob("*/post.json")):
-        post = load_json(post_json)
-        if post.get("draft"):
-            continue
-        post_dir = post_json.parent
-        post["sections"] = [load_section(post_dir, s) for s in post.get("sections", [])]
-        posts.append(post)
+def render_about(env: Environment, site: Dict[str, Any]):
+    about_tmpl = TEMPLATES / "about.html"
+    if about_tmpl.exists():
+        tmpl = env.get_template("about.html")
+        base_url = site.get("base_url","").rstrip("/")
+        ctx = {"site": site, "base": base_url, "now": datetime.now(timezone.utc)}
+        html = tmpl.render(**ctx)
+        write_text(DIST / "about.html", html)
 
-    # 2) Back-compat: flat files like content/posts/*.json
-    for p in sorted(posts_dir.glob("*.json")):
-        if p.name == "post.json":
-            continue
-        post = load_json(p)
-        if post.get("draft"):
-            continue
-        # sections may reference no files here; keep as-is
-        posts.append(post)
+def clean_dist():
+    if DIST.exists():
+        shutil.rmtree(DIST)
+    DIST.mkdir(parents=True, exist_ok=True)
 
-    # Render index
-    tmpl_index = env.get_template("index.html")
-    write(OUT / "index.html", tmpl_index.render(title="Home", posts=list(reversed(posts))))
+def build():
+    clean_dist()
+    copy_static()
+    site = load_site()
+    posts = load_posts()
+    env = jinja_env()
 
     # Render posts
-    tmpl_post = env.get_template("post.html")
     for post in posts:
-        write(
-            OUT / "posts" / post["slug"] / "index.html",
-            tmpl_post.render(title=post["title"], post=post),
-        )
+        render_post(env, site, post)
 
-    # Optional: About page (still JSON for now)
-    about_src = CONTENT / "about.json"
-    if about_src.exists():
-        about = load_json(about_src)
-        write(OUT / "about.html", tmpl_post.render(title=about["title"], post=about))
-
-    # Feeds and sitemap
-    gen_rss(site, posts)
-    gen_sitemap(site, posts)
-
-    # Optional custom domain
-    cname = site.get("cname")
-    if cname:
-        write(OUT / "CNAME", cname.strip() + "\n")
-
-    print("Built to", OUT)
-
+    # Index + About
+    render_index(env, site, posts)
+    render_about(env, site)
 
 if __name__ == "__main__":
     build()
+    print("Built site into", DIST)
