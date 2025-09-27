@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block main %}
+
+{# Breadcrumb / series header #}
+<div class="page-grid">
+  <header class="article header-span-2">
+    <div class="crumbs">
+      <a href="{{ base }}/">Home</a> ·
+      <a href="{{ base }}/posts/{{ post.slug }}/">{{ post.title }}</a>
+    </div>
+    <h1>{{ section.title or ('Chapter ' ~ (index + 1)) }}</h1>
+    <p class="muted">{{ post.date }}{% if post.tags %} · {{ post.tags|join(", ") }}{% endif %}</p>
+  </header>
+</div>
+
+{# Chapter body (single section) with per-section marginalia support #}
+<section class="row-grid">
+
+  {% if section.left_margin_image %}
+    <aside class="marginalia row-left">
+      {% if section.left_margin_caption %}
+        <div class="marginalia--box">{{ section.left_margin_caption }}</div>
+      {% endif %}
+      <img src="{{ base }}/static/{{ section.left_margin_image|e }}" alt="{{ section.left_margin_alt or '' }}">
+    </aside>
+  {% elif section.left_note_html %}
+    <aside class="marginalia row-left">
+      <div class="marginalia--box">{{ section.left_note_html | safe }}</div>
+    </aside>
+  {% elif section.left_note %}
+    <aside class="marginalia row-left">
+      <div class="marginalia--box">{{ section.left_note }}</div>
+    </aside>
+  {% endif %}
+
+  <div class="row-main">
+    {% if section.type == "html" %}
+      {{ section.html | safe }}
+    {% elif section.type == "p" %}
+      <p>{{ section.text }}</p>
+    {% elif section.type == "expander_html" %}
+      {% set id = "exp-1" %}
+      <button class="expander" aria-expanded="false" aria-controls="{{ id }}">
+        <span class="chevron" aria-hidden="true">▸</span>
+        <span class="sr-only">{{ section.label or "Show more" }}</span>
+      </button>
+      <div id="{{ id }}" class="expando" hidden>
+        {{ section.html | safe }}
+      </div>
+    {% elif section.type == "expander" %}
+      {% set id = "exp-1" %}
+      <button class="expander" aria-expanded="false" aria-controls="{{ id }}">
+        <span class="chevron" aria-hidden="true">▸</span>
+        <span class="sr-only">{{ section.label or "Show more" }}</span>
+      </button>
+      <div id="{{ id }}" class="expando" hidden>
+        <p>{{ section.content }}</p>
+      </div>
+    {% endif %}
+  </div>
+
+  {% if section.right_margin_image %}
+    <aside class="marginalia row-right">
+      {% if section.right_margin_caption %}
+        <div class="marginalia--box">{{ section.right_margin_caption }}</div>
+      {% endif %}
+      <img src="{{ base }}/static/{{ section.right_margin_image|e }}" alt="{{ section.right_margin_alt or '' }}">
+    </aside>
+  {% elif section.right_note_html %}
+    <aside class="marginalia row-right">
+      <div class="marginalia--box">{{ section.right_note_html | safe }}</div>
+    </aside>
+  {% elif section.right_note %}
+    <aside class="marginalia row-right">
+      <div class="marginalia--box">{{ section.right_note }}</div>
+    </aside>
+  {% endif %}
+
+</section>
+
+{# Previous / Next navigation (chapter-level) #}
+{% if prev or next %}
+  <nav class="page-grid" aria-label="Chapter navigation">
+    <div class="article header-span-2 post-nav">
+      <div class="post-nav-left">
+        {% if prev %}
+          <a href="{{ base }}/posts/{{ post.slug }}/{{ prev.slug }}/">previous: {{ prev.title }}</a>
+        {% endif %}
+      </div>
+      <div class="post-nav-right">
+        {% if next %}
+          <a href="{{ base }}/posts/{{ post.slug }}/{{ next.slug }}/">next: {{ next.title }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+{% endif %}
+
+{% endblock %}

@@ -1,5 +1,3 @@
-# Chapter II. Diagnosing the Disease: The Contradiction at the Heart of Modernity
-
 Modernity presents itself as a project of liberation—an emancipation from the oppressive structures, superstitions, and unquestioned traditions of the past. It promises not merely freedom for the privileged few, but universal empowerment. This vision is grounded in the celebration of individuality and the elevation of self-interest as a legitimate—and even noble—expression of personal freedom.
 
 But a paradox is unfolding before our eyes: freedom for some increasingly entails domination over others. If each person is encouraged to pursue their self-interest above all else, it becomes inevitable that the strong will seek to entrench their position by constraining the freedom of the weak. The system that promises liberation ends up institutionalizing new forms of exploitation. In such a world, “freedom” no longer means mutual flourishing—it means the freedom to outcompete, outspend, and overpower.
