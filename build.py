@@ -32,10 +32,19 @@ def copy_static():
     shutil.copytree(STATIC, out)
 
 def render_markdown(path: Path) -> str:
+    """Render a Markdown file to HTML with useful extensions, including attr_list for image classes."""
     text = path.read_text(encoding="utf-8")
     return md.markdown(
         text,
-        extensions=["extra", "sane_lists", "smarty", "toc"]
+        extensions=[
+            # Core ergonomics:
+            "extra",        # tables, fenced code, etc.
+            "sane_lists",
+            "smarty",
+            "toc",
+            # Enable `{.class #id key=val}` on images, links, etc.
+            "attr_list",
+        ]
     )
 
 def slugify(text: str) -> str:
@@ -52,7 +61,7 @@ EXTRA_KEYS = (
     "left_margin_image","left_margin_alt","left_margin_caption",
     "right_margin_image","right_margin_alt","right_margin_caption",
     "left_note","left_note_html","right_note","right_note_html",
-    "label","title",
+    "label","title","section_slug",
 )
 
 def keep_extras(dst: Dict[str, Any], src: Dict[str, Any]) -> Dict[str, Any]:
@@ -95,11 +104,12 @@ def load_posts() -> List[Dict[str, Any]]:
                 for s in post.get("sections", []):
                     ns = load_section(pdir, s)
                     # derive a per-section slug if title present (for chapter URLs)
-                    title = ns.get("title")
-                    if title:
-                        ns["section_slug"] = slugify(title)
+                    if "section_slug" in ns and ns["section_slug"]:
+                        sec_slug = slugify(ns["section_slug"])
                     else:
-                        ns["section_slug"] = f"section-{len(sections)+1}"
+                        title = ns.get("title")
+                        sec_slug = slugify(title) if title else f"section-{len(sections)+1}"
+                    ns["section_slug"] = sec_slug
                     sections.append(ns)
                 post["sections"] = sections
                 post["dir"] = pdir

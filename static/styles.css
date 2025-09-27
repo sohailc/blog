@@ -128,6 +128,42 @@ main {
 .post-nav a{ text-decoration:none; border-bottom:1px solid transparent; }
 .post-nav a:hover{ border-color: currentColor; }
 
+/* ---------- Inline graphics helpers (Markdown-driven) ---------- */
+
+/* Centered figure + caption */
+.inline-figure { text-align: center; margin: 2rem 0; }
+.inline-figure img { max-width: 80%; height: auto; }
+.inline-figure figcaption { color: var(--muted); font-size: 0.9rem; margin-top: .5rem; }
+
+/* Float images inside paragraphs/sections */
+.img-float {
+  float: right;
+  max-width: 40%;
+  margin: 0 0 1rem 1rem;
+}
+.img-float-left {
+  float: left;
+  max-width: 40%;
+  margin: 0 1rem 1rem 0;
+}
+
+/* Utility for small inline icons/images */
+.img-inline {
+  display: inline-block;
+  vertical-align: middle;
+  max-height: 1.6em;
+}
+
+/* Responsive: unwrap floats on narrow screens */
+@media (max-width: 600px){
+  .img-float, .img-float-left {
+    float: none;
+    display: block;
+    margin: .5rem auto;
+    max-width: 80%;
+  }
+}
+
 /* Responsive */
 @media (max-width: 1200px){ :root { --margin-col: 240px; } }
 @media (max-width: 1024px){ :root { --margin-col: 220px; } }
