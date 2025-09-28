@@ -1,5 +1,22 @@
 #!/usr/bin/env python3
-import json, shutil, re
+"""
+Static site builder for a JSON/Markdown-driven blog with multi-chapter series.
+
+Features
+- One series folder per "post" under content/posts/<series-slug>/
+- post.json lists sections/chapters; each can be a markdown file with optional title
+- Renders:
+    /posts/<series-slug>/index.html           (series landing with TOC)
+    /posts/<series-slug>/<chapter-slug>/      (per-chapter pages)
+- Copies per-post assets (PNG/JPG/SVG/etc.) from the series folder to:
+    - the series landing output folder, and
+    - EVERY chapter output folder
+  so that Markdown paths like "./image.png" work from both landing and chapters.
+"""
+
+import json
+import re
+import shutil
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional
@@ -7,6 +24,7 @@ from typing import Dict, Any, List, Optional
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import markdown as md
 
+# ---------- Paths ----------
 ROOT = Path(__file__).parent.resolve()
 CONTENT = ROOT / "content"
 POSTS = CONTENT / "posts"
@@ -14,7 +32,7 @@ DIST = ROOT / "dist"
 STATIC = ROOT / "static"
 TEMPLATES = ROOT / "templates"
 
-# ---------- Utilities ----------
+# ---------- Utils ----------
 
 def read_json(path: Path) -> Dict[str, Any]:
     with path.open("r", encoding="utf-8") as f:
@@ -32,22 +50,22 @@ def copy_static():
     shutil.copytree(STATIC, out)
 
 def render_markdown(path: Path) -> str:
-    """Render a Markdown file to HTML with useful extensions, including attr_list for image classes."""
+    """Render Markdown to HTML with useful extensions, including attr_list
+    so you can use:  ![alt](img.png){.img-float}"""
     text = path.read_text(encoding="utf-8")
     return md.markdown(
         text,
         extensions=[
-            # Core ergonomics:
-            "extra",        # tables, fenced code, etc.
+            "extra",        # tables, fenced code blocks, etc.
             "sane_lists",
             "smarty",
             "toc",
-            # Enable `{.class #id key=val}` on images, links, etc.
-            "attr_list",
+            "attr_list",    # enables {.class #id key=val} on elements
         ]
     )
 
 def slugify(text: str) -> str:
+    """Make a URL slug from a title or label."""
     s = text.strip().lower()
     s = s.replace("’", "").replace("'", "")
     s = re.sub(r"[^a-z0-9\s-]", "", s)
@@ -55,13 +73,28 @@ def slugify(text: str) -> str:
     s = re.sub(r"-{2,}", "-", s)
     return s.strip("-") or "chapter"
 
-# ---------- Section normalization (preserve extras) ----------
+def copy_post_assets(src_dir: Path, dest_dir: Path) -> None:
+    """Copy all non-markdown/non-json files from a post (series) folder to dest."""
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    for f in src_dir.iterdir():
+        if not f.is_file():
+            continue
+        if f.suffix.lower() in (".md", ".json"):
+            continue
+        # copy all other files: images, svgs, pdfs, etc.
+        shutil.copy2(f, dest_dir / f.name)
+
+# ---------- Section normalization ----------
 
 EXTRA_KEYS = (
+    # per-section margin images/notes (kept if you use them)
     "left_margin_image","left_margin_alt","left_margin_caption",
     "right_margin_image","right_margin_alt","right_margin_caption",
     "left_note","left_note_html","right_note","right_note_html",
-    "label","title","section_slug",
+    # expander label
+    "label",
+    # chapter title / explicit section slug
+    "title","section_slug",
 )
 
 def keep_extras(dst: Dict[str, Any], src: Dict[str, Any]) -> Dict[str, Any]:
@@ -83,9 +116,10 @@ def load_section(post_dir: Path, section: Dict[str, Any]) -> Dict[str, Any]:
         else:
             return keep_extras(section, section)
 
+    # passthrough for already-HTML or paragraph sections
     return keep_extras(section, section)
 
-# ---------- Load posts ----------
+# ---------- Load site & posts ----------
 
 def load_site() -> Dict[str, Any]:
     site_json = CONTENT / "site.json"
@@ -97,25 +131,28 @@ def load_posts() -> List[Dict[str, Any]]:
     posts: List[Dict[str, Any]] = []
     if POSTS.exists():
         for pdir in sorted(POSTS.iterdir()):
-            if pdir.is_dir() and (pdir / "post.json").exists():
-                post = read_json(pdir / "post.json")
+            pj = pdir / "post.json"
+            if pdir.is_dir() and pj.exists():
+                post = read_json(pj)
+
                 # normalize sections
-                sections = []
+                norm_sections: List[Dict[str, Any]] = []
                 for s in post.get("sections", []):
                     ns = load_section(pdir, s)
-                    # derive a per-section slug if title present (for chapter URLs)
+                    # derive a per-section slug for chapter URLs
                     if "section_slug" in ns and ns["section_slug"]:
                         sec_slug = slugify(ns["section_slug"])
                     else:
                         title = ns.get("title")
-                        sec_slug = slugify(title) if title else f"section-{len(sections)+1}"
+                        sec_slug = slugify(title) if title else f"section-{len(norm_sections)+1}"
                     ns["section_slug"] = sec_slug
-                    sections.append(ns)
-                post["sections"] = sections
+                    norm_sections.append(ns)
+
+                post["sections"] = norm_sections
                 post["dir"] = pdir
                 posts.append(post)
 
-    # sort newest first
+    # sort newest first by date if present
     def _key(p):
         try:
             return datetime.fromisoformat(p.get("date", "1970-01-01"))
@@ -136,7 +173,7 @@ def jinja_env() -> Environment:
 # ---------- Renderers ----------
 
 def render_series_landing(env: Environment, site: Dict[str, Any], post: Dict[str, Any]):
-    """Landing page at /posts/<series-slug>/ with TOC and optional intro sections."""
+    """Landing page at /posts/<series-slug>/ with TOC and (optionally) intro sections."""
     tmpl = env.get_template("post.html")
     base_url = site.get("base_url","").rstrip("/")
     ctx = {
@@ -146,8 +183,11 @@ def render_series_landing(env: Environment, site: Dict[str, Any], post: Dict[str
         "now": datetime.now(timezone.utc),
     }
     html = tmpl.render(**ctx)
-    out = DIST / "posts" / post["slug"] / "index.html"
-    write_text(out, html)
+    out_dir = DIST / "posts" / post["slug"]
+    write_text(out_dir / "index.html", html)
+
+    # Copy series assets to series landing dir
+    copy_post_assets(post["dir"], out_dir)
 
 def render_chapter_page(env: Environment, site: Dict[str, Any], post: Dict[str, Any], idx: int):
     """Per-chapter page at /posts/<series-slug>/<chapter-slug>/"""
@@ -183,16 +223,18 @@ def render_chapter_page(env: Environment, site: Dict[str, Any], post: Dict[str, 
         "now": datetime.now(timezone.utc),
     }
     html = tmpl.render(**ctx)
-    out = DIST / "posts" / post["slug"] / section["section_slug"] / "index.html"
-    write_text(out, html)
+    out_dir = DIST / "posts" / post["slug"] / section["section_slug"]
+    write_text(out_dir / "index.html", html)
+
+    # Copy series assets to THIS chapter dir
+    copy_post_assets(post["dir"], out_dir)
 
 def render_index(env: Environment, site: Dict[str, Any], posts: List[Dict[str, Any]]):
     tmpl = env.get_template("index.html")
     base_url = site.get("base_url","").rstrip("/")
     ctx = {"site": site, "base": base_url, "posts": posts, "now": datetime.now(timezone.utc)}
     html = tmpl.render(**ctx)
-    out = DIST / "index.html"
-    write_text(out, html)
+    write_text(DIST / "index.html", html)
 
 def render_about(env: Environment, site: Dict[str, Any]):
     about_tmpl = TEMPLATES / "about.html"
@@ -217,15 +259,12 @@ def build():
     posts = load_posts()
     env = jinja_env()
 
-    # For each series post:
+    # Render everything
     for post in posts:
-        # 1) Series landing (TOC)
         render_series_landing(env, site, post)
-        # 2) Per-chapter pages
         for i in range(len(post.get("sections", []))):
             render_chapter_page(env, site, post, i)
 
-    # Index + About
     render_index(env, site, posts)
     render_about(env, site)
 
