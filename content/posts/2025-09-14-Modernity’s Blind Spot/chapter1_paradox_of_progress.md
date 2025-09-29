@@ -12,6 +12,10 @@ To gain a fuller picture, let's consider India at the turn of the 20th century. 
 
 This early ambivalence toward modern technology - caught between awe and mistrust - finds parallels in our own time. Consider the introduction of 5G networks and the anxieties surrounding microwave radiation, or the backlash against genetically modified foods and vaccinations. These fears are not solely rooted in science or pseudoscience; they reflect deeper discomforts. Many people instinctively prefer what seems "natural" over what is synthetic, and they often view the institutions advancing such technologies as opaque, profit-driven, or even exploitative.
 
+![What is progress?](./paradox_of_progress.png){.img-float-left width="35%"}
+
+But what do we mean by progress? Too often it is reduced to numbers—GDP, bandwidth, life expectancy—while the deeper question of whether people actually feel more fulfilled, connected, or free is left unasked.
+
 The heart of the issue lies in how modernity conceptualizes human beings: as autonomous, self-interested actors. This framing is not merely descriptive, it becomes embedded in policy, culture, and institutional design, shaping the systems we inhabit. These systems often prioritize profit, efficiency, and short-term gain above all else. In doing so, they create structures that feel exploitative and alienating, prompting people, consciously or not, to reject them.
 
 Such rejection is not always the product of misunderstanding or cognitive limitation. Just as many in colonial India distrusted railroads and telegraphs because they correctly perceived them as tools of domination, people today may resist modern institutions not out of ignorance, but because they recognize - at least intuitively - that those systems often serve narrow interests rather than the common good.
