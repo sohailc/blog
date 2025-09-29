@@ -46,7 +46,9 @@ main {
 .post-list li { margin: .5rem 0; }
 .muted { color: var(--muted); }
 
-/* Expander */
+/* =========================
+   Expander (arrow reveal)
+   ========================= */
 .expander{
   border: none; background: transparent; cursor: pointer;
   display: inline-flex; gap: .25rem; align-items: center;
@@ -60,7 +62,9 @@ main {
   overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
 }
 
-/* Page grid */
+/* =========================
+   Page grid (general content)
+   ========================= */
 .page-grid{
   position: relative;
   display: grid;
@@ -71,7 +75,9 @@ main {
 .article { grid-column: 2; }
 .header-span-2 { grid-column: 2 / span 2; }
 
-/* Row grid (per-section alignment) */
+/* =========================
+   Row grid (per-section alignment)
+   ========================= */
 .row-grid{
   display: grid;
   grid-template-columns: var(--margin-col) min(var(--maxw), 100%) var(--margin-col);
@@ -83,7 +89,9 @@ main {
 .row-left  { grid-column: 1; }
 .row-right { grid-column: 3; }
 
-/* Marginalia */
+/* =========================
+   Marginalia look (notes/images)
+   ========================= */
 .marginalia        { font-size: 0.9rem; color: #555; line-height: 1.4; }
 .marginalia--box{
   background: #fafafa; border: 1px solid var(--border); border-radius: 8px;
@@ -93,11 +101,14 @@ main {
   max-width: 100%; height: auto; display: block; border-radius: 6px;
   box-shadow: 0 1px 6px rgba(0,0,0,.06); margin: 0.25rem 0 0.5rem;
 }
+/* Optional: make per-section images faint like watermarks */
 .row-left img, .row-right img{
   opacity: 0.25; filter: grayscale(100%); mix-blend-mode: multiply;
 }
 
-/* Watermarks (page-level, optional) */
+/* =========================
+   Page-level watermark images (decorative; absolute)
+   ========================= */
 .watermark-left, .watermark-right{
   position: absolute; top: var(--wm-top, 0); width: var(--margin-col);
   opacity: 0.15; pointer-events: none; z-index: 0;
@@ -109,7 +120,30 @@ main {
 }
 .article, .header-span-2 { position: relative; z-index: 1; }
 
-/* TOC + chapter nav */
+/* =========================
+   Hero background banner (optional)
+   ========================= */
+.hero-bg{
+  position: relative; isolation: isolate; width: 100%;
+  aspect-ratio: var(--hero-ar, 3 / 1);
+  min-height: 20rem; max-height: 70vh; overflow: hidden;
+}
+.hero-bg::before{
+  content: ""; position: absolute; inset: 0;
+  background-image: var(--hero-img);
+  background-repeat: no-repeat; background-size: cover;
+  background-position: var(--hero-pos, left center);
+  opacity: var(--hero-opacity, .22); z-index: 0; pointer-events: none;
+}
+.hero-content{ position: relative; z-index: 1; padding-block: 2.5rem; }
+.hero-fade .article{
+  position: relative; z-index: 1; background: rgba(255,255,255,0.78);
+  border-radius: 8px; padding: .5rem .75rem;
+}
+
+/* =========================
+   TOC + breadcrumbs + post nav
+   ========================= */
 .toc{
   background: #fafafa; border: 1px solid var(--border); border-radius: 8px;
   padding: .75rem 1rem; margin: 0.5rem 0 1rem;
@@ -121,6 +155,12 @@ main {
 .crumbs a { text-decoration: none; border-bottom: 1px dashed transparent; }
 .crumbs a:hover { border-bottom-color: currentColor; }
 
+.chapter-title{
+  margin: 1.4rem 0 .6rem;
+  line-height: 1.25;
+  scroll-margin-top: 6rem; /* better anchor scrolling */
+}
+
 .post-nav{
   display:flex; justify-content:space-between; gap:1rem;
   padding:1.25rem 0; border-top:1px solid var(--border); margin-top:1.5rem;
@@ -128,45 +168,54 @@ main {
 .post-nav a{ text-decoration:none; border-bottom:1px solid transparent; }
 .post-nav a:hover{ border-color: currentColor; }
 
-/* ---------- Inline graphics helpers (Markdown-driven) ---------- */
+/* =========================
+   Inline graphics helpers
+   ========================= */
 
 /* Centered figure + caption */
 .inline-figure { text-align: center; margin: 2rem 0; }
 .inline-figure img { max-width: 80%; height: auto; }
 .inline-figure figcaption { color: var(--muted); font-size: 0.9rem; margin-top: .5rem; }
 
-/* Float images inside paragraphs/sections */
-.img-float {
+/* Robust float selectors:
+   - Works if class lands on <img>, <p>, or <figure> */
+.img-float,
+.img-float-right,
+img.img-float, img.img-float-right,
+figure.img-float, figure.img-float-right,
+p.img-float, p.img-float-right {
   float: right;
-  max-width: 40%;
   margin: 0 0 1rem 1rem;
 }
-.img-float-left {
+
+/* Left variants for symmetry */
+.img-float-left,
+img.img-float-left,
+figure.img-float-left,
+p.img-float-left {
   float: left;
-  max-width: 40%;
   margin: 0 1rem 1rem 0;
 }
 
-/* Utility for small inline icons/images */
+/* Tiny inline icon */
 .img-inline {
   display: inline-block;
   vertical-align: middle;
   max-height: 1.6em;
 }
 
-/* Responsive: unwrap floats on narrow screens */
-@media (max-width: 600px){
-  .img-float, .img-float-left {
-    float: none;
-    display: block;
-    margin: .5rem auto;
-    max-width: 80%;
-  }
-}
+/* Clear helper to stop wrapping */
+.clear { clear: both; }
 
-/* Responsive */
-@media (max-width: 1200px){ :root { --margin-col: 240px; } }
-@media (max-width: 1024px){ :root { --margin-col: 220px; } }
+/* =========================
+   Responsive behavior
+   ========================= */
+@media (max-width: 1200px){
+  :root { --margin-col: 240px; }
+}
+@media (max-width: 1024px){
+  :root { --margin-col: 220px; }
+}
 @media (max-width: 900px){
   .page-grid{ grid-template-columns: 1fr; }
   .article, .header-span-2 { grid-column: 1; }
@@ -174,8 +223,26 @@ main {
   .row-main, .row-left, .row-right { grid-column: 1; }
   .marginalia { margin: .5rem 0 1rem; color:#666; }
   .watermark-left, .watermark-right { display: none; }
+  .hero-bg{ aspect-ratio: 16 / 9; min-height: 14rem; }
+  .hero-bg::before{ opacity: .16; background-position: center top; }
+  .hero-fade .article{ background: rgba(255,255,255,0.86); }
 }
 
-/* Prose spacing */
+/* Un-float on narrow screens (images) */
+@media (max-width: 600px){
+  .img-float, .img-float-left, .img-float-right,
+  img.img-float, img.img-float-left, img.img-float-right,
+  figure.img-float, figure.img-float-left, figure.img-float-right,
+  p.img-float, p.img-float-left, p.img-float-right {
+    float: none;
+    display: block;
+    margin: .5rem auto;
+    max-width: 80%;
+  }
+}
+
+/* =========================
+   Pleasant prose spacing
+   ========================= */
 .row-main p { margin: 1rem 0; }
 .row-main h1, .row-main h2, .row-main h3 { line-height: 1.25; margin: 1.2em 0 .6em; }
