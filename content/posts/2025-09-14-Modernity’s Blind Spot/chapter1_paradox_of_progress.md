@@ -14,9 +14,9 @@ This early ambivalence toward modern technology - caught between awe and mistrus
 
 ![What is progress?](./paradox_of_progress.png){.img-float-right style="width:35%"}
 
-But what do we mean by progress? Too often it is reduced to numbers—GDP, bandwidth, life expectancy—while the deeper question of whether people actually feel more fulfilled, connected, or free is left unasked.
+At first sight, it may seem paradoxical that people reject progress. To understand this paradox, we must first ask: what do we mean by progress? Too often it is reduced to numbers—GDP, bandwidth, life expectancy—while the deeper question of whether people actually feel more fulfilled, connected, or free is left unasked.
 
-The heart of the issue lies in how modernity conceptualizes human beings: as autonomous, self-interested actors. This framing is not merely descriptive, it becomes embedded in policy, culture, and institutional design, shaping the systems we inhabit. These systems often prioritize profit, efficiency, and short-term gain above all else. In doing so, they create structures that feel exploitative and alienating, prompting people, consciously or not, to reject them.
+And here we touch the core of the problem: modernity’s own assumptions about what it means to be human. It casts us as autonomous, self-interested actors. This framing is not merely descriptive; it becomes embedded in policy, culture, and institutional design, shaping the systems we inhabit. These systems often prioritize profit, efficiency, and short-term gain above all else. In doing so, they create structures that feel exploitative and alienating, prompting people, consciously or not, to reject them.
 
 Such rejection is not always the product of misunderstanding or cognitive limitation. Just as many in colonial India distrusted railroads and telegraphs because they correctly perceived them as tools of domination, people today may resist modern institutions not out of ignorance, but because they recognize - at least intuitively - that those systems often serve narrow interests rather than the common good.
 
