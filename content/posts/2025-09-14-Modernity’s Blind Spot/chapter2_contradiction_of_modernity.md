@@ -2,6 +2,8 @@ Modernity presents itself as a project of liberation—an emancipation from the 
 
 But a paradox is unfolding before our eyes: freedom for some increasingly entails domination over others. If each person is encouraged to pursue their self-interest above all else, it becomes inevitable that the strong will seek to entrench their position by constraining the freedom of the weak. The system that promises liberation ends up institutionalizing new forms of exploitation. In such a world, “freedom” no longer means mutual flourishing—it means the freedom to outcompete, outspend, and overpower.
 
+## Free Market Flummoxing
+
 ![What free market?](./free_market_question.png){.img-float-left width="35%"}
 
 There are many tangible manifestations of this contradiction. Consider the economic realm, where the free market is upheld as the archetype of rational self-interest in action. Here, autonomous agents are expected to compete in pursuit of personal gain, while the state intervenes only minimally—to enforce contracts, maintain order, and prevent fraud. But within this logic lies the seed of its own undoing. It is in the self-interest of many market participants to eliminate competition, not preserve it. The drive to maximize market share leads inevitably to monopolies, and monopolies distort the very freedoms the market was meant to secure.
@@ -9,11 +11,13 @@ There are many tangible manifestations of this contradiction. Consider the econo
 A telling illustration comes from Amazon’s treatment of third-party sellers. Many small and medium businesses rely on Amazon’s platform as their primary, if not sole, access to large marketplaces. However, extensive reports and investigations reveal Amazon using that very reliance to their unfair advantage. 
 
 <details>
-<summary>Read more...</summary>
+<summary>Read more about Amazons anti-competitive behavior </summary>
 In India, internal documents showed Amazon’s private-label team copying top seller products and manipulating search placements to favor its own brands <a href="https://www.aljazeera.com/news/2021/10/14/amazon-india-copied-products-rigged-search-results-own-brands-reuters">[Al Jazeera]</a>. In Europe, the European Commission concluded Amazon used granular seller data—like sales figures and rankings—to inform private-label launches and distort pricing and inventory, effectively crowding out competitors <a href="https://www.voguebusiness.com/companies/amazon-european-commission-antitrust">[Vogue business]</a>. In the U.S., Wall Street Journal reporting found that Amazon employees accessed individual seller data to launch competing products despite internal policies prohibiting it <a href="https://www.foxbusiness.com/retail/amazon-scooped-up-data-from-its-own-sellers-to-launch-competing-products">[FOX business]</a>. And in the UK, some 35,000 independent retailers have filed a £1 billion lawsuit alleging Amazon exploited seller data to undercut them with its own products <a href="https://www.theguardian.com/technology/article/2024/jun/07/independent-uk-retailers-claim-1bn-damages-against-amazon">[The Guardian]</a>. These cases underscore how unregulated markets can concentrate power, not empower participation.
 </details>
 
 This economic dynamic is not a fluke. It reflects a deeper structural flaw within modernity: a system built on self-interest will inevitably reward behaviors that concentrate power, whether in commerce, technology, or politics. And each domain reveals its own version of the same underlying contradiction.
+
+## Self-interest: liberation or languishing
 
 Consider, for example, the legal and political domain. A pivotal moment came with the U.S. Supreme Court’s decision in Buckley v. Valeo (1976). In this case, the plaintiffs challenged federal limits on campaign contributions and independent political expenditures, arguing that such restrictions infringed on their First Amendment right to free speech—particularly their ability to use personal wealth to support preferred candidates and causes. The Court struck a compromise: while it upheld limits on direct contributions (to prevent corruption), it ruled that independent expenditures—money spent to influence elections without coordinating with campaigns—could not be restricted.
 
