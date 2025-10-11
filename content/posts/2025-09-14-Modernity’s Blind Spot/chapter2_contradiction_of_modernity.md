@@ -2,6 +2,8 @@ Modernity presents itself as a project of liberation—an emancipation from the 
 
 But a paradox is unfolding before our eyes: freedom for some increasingly entails domination over others. If each person is encouraged to pursue their self-interest above all else, it becomes inevitable that the strong will seek to entrench their position by constraining the freedom of the weak. The system that promises liberation ends up institutionalizing new forms of exploitation. In such a world, “freedom” no longer means mutual flourishing—it means the freedom to outcompete, outspend, and overpower.
 
+![What mfree market?](./free_market_question.png){.img-float-left width="35%"}
+
 There are many tangible manifestations of this contradiction. Consider the economic realm, where the free market is upheld as the archetype of rational self-interest in action. Here, autonomous agents are expected to compete in pursuit of personal gain, while the state intervenes only minimally—to enforce contracts, maintain order, and prevent fraud. But within this logic lies the seed of its own undoing. It is in the self-interest of many market participants to eliminate competition, not preserve it. The drive to maximize market share leads inevitably to monopolies, and monopolies distort the very freedoms the market was meant to secure.
 
 This economic dynamic is not a fluke. It reflects a deeper structural flaw within modernity: a system built on self-interest will inevitably reward behaviors that concentrate power, whether in commerce, technology, or politics. And each domain reveals its own version of the same underlying contradiction.
