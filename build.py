@@ -12,6 +12,9 @@ Features
     - the series landing output folder, and
     - EVERY chapter output folder
   so that Markdown paths like "./image.png" work from both landing and chapters.
+- Markdown extensions enabled:
+    extra, sane_lists, smarty, toc, attr_list, md_in_html
+  -> lets you use Markdown inside raw HTML (e.g., <details> with [links])
 """
 
 import json
@@ -22,7 +25,7 @@ from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-import markdown as md
+import markdown as md  # Python-Markdown
 
 # ---------- Paths ----------
 ROOT = Path(__file__).parent.resolve()
@@ -50,8 +53,10 @@ def copy_static():
     shutil.copytree(STATIC, out)
 
 def render_markdown(path: Path) -> str:
-    """Render Markdown to HTML with useful extensions, including attr_list
-    so you can use:  ![alt](img.png){.img-float}"""
+    """Render Markdown to HTML with useful extensions.
+    - attr_list: enables `{.class #id key=val}`
+    - md_in_html: enables Markdown inside raw HTML blocks (<details>, etc.)
+    """
     text = path.read_text(encoding="utf-8")
     return md.markdown(
         text,
@@ -60,7 +65,8 @@ def render_markdown(path: Path) -> str:
             "sane_lists",
             "smarty",
             "toc",
-            "attr_list",    # enables {.class #id key=val} on elements
+            "attr_list",
+            "md_in_html",   # <details> with [links] works
         ]
     )
 
@@ -81,13 +87,12 @@ def copy_post_assets(src_dir: Path, dest_dir: Path) -> None:
             continue
         if f.suffix.lower() in (".md", ".json"):
             continue
-        # copy all other files: images, svgs, pdfs, etc.
         shutil.copy2(f, dest_dir / f.name)
 
 # ---------- Section normalization ----------
 
 EXTRA_KEYS = (
-    # per-section margin images/notes (kept if you use them)
+    # per-section margin images/notes (if you use them later)
     "left_margin_image","left_margin_alt","left_margin_caption",
     "right_margin_image","right_margin_alt","right_margin_caption",
     "left_note","left_note_html","right_note","right_note_html",
@@ -112,7 +117,10 @@ def load_section(post_dir: Path, section: Dict[str, Any]) -> Dict[str, Any]:
     if stype == "expander":
         if "file" in section:
             html = render_markdown(post_dir / section["file"])
-            return keep_extras({"type": "expander_html", "label": section.get("label","More"), "html": html}, section)
+            return keep_extras(
+                {"type": "expander_html", "label": section.get("label","More"), "html": html},
+                section
+            )
         else:
             return keep_extras(section, section)
 
