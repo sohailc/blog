@@ -8,7 +8,7 @@ But a paradox is unfolding before our eyes: freedom for some increasingly entail
 
 There are many tangible manifestations of this contradiction. Consider the economic realm, where the free market is upheld as the archetype of rational self-interest in action. Here, autonomous agents are expected to compete in pursuit of personal gain, while the state intervenes only minimally—to enforce contracts, maintain order, and prevent fraud. But within this logic lies the seed of its own undoing. It is in the self-interest of many market participants to eliminate competition, not preserve it. The drive to maximize market share leads inevitably to monopolies, and monopolies distort the very freedoms the market was meant to secure.
 
-A telling illustration comes from Amazon’s treatment of third-party sellers. Many small and medium businesses rely on Amazon’s platform as their primary, if not sole, access to large marketplaces. However, extensive reports and investigations reveal Amazon using that very reliance to their unfair advantage. 
+A telling illustration comes from Amazon’s treatment of third-party sellers. Many small and medium businesses rely on Amazon’s platform as their primary, if not sole, access to large marketplaces. However, extensive reports and investigations reveal Amazon using that very reliance to their unfair advantage. The result for consumers is not more choice, but less!
 
 <details>
 <summary>Read more about Amazons anti-competitive behavior </summary>
