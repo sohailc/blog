@@ -14,10 +14,18 @@ This early ambivalence toward modern technology—caught between awe and mistrus
 
 Just as many in colonial India distrusted railroads and telegraphs because they correctly perceived them as tools of domination, people today may resist modern institutions not out of ignorance, but because they recognize—at least intuitively—that those systems often serve narrow interests rather than the common good. It is rarely that technologies like vaccines are themselves part of a nefarious agenda; rather, mistrust grows when the institutions promoting them engage in practices—such as predatory pricing or opaque decision-making—that signal self-interest over public welfare.
 
-The core of the problem lies deeper still—in modernity’s own assumptions about what it means to be human. It casts us as autonomous, self-interested actors. This framing is not merely descriptive; it becomes embedded in policy, culture, and institutional design, shaping the systems we inhabit. These systems often prioritize profit, efficiency, and short-term gain above all else. In doing so, they create structures that feel exploitative and alienating, prompting people, consciously or not, to reject them. When we design our institutions around the assumption that people are driven solely by self-interest, should we be surprised when they foster narcissism, alienation, and leaders who embody those same values?
+The core of the problem lies deeper still—in modernity’s own assumptions about what it means to be human. These assumptions shape not just our technologies, but our values and institutions. They raise questions we seldom pause to ask: 
+
+* What do we mean by progress? 
+* What is, at its core, freedom? 
+* What are our true needs as humans? 
+
+These assumptions are embedded in our policies, cultures, and systems. And those systems, in turn, often prioritize profit, efficiency, and short-term gain above all else. In doing so, they create structures that feel exploitative and alienating—prompting people, consciously or not, to reject them. When we design our institutions around the belief that people are driven solely by self-interest, should we be surprised when they foster narcissism, alienation, and leaders who embody those same values?
 
 ![What is progress?](./paradox_of_progress.png){.img-float-right style="width:35%"}
 
-This brings us to a deeper question: what do we mean by progress? Too often it is reduced to numbers—GDP, bandwidth, life expectancy—while the more vital question of whether people actually feel more fulfilled, connected, or free is left unasked. Modernity gave us freedom, but not connection. It dismantled the hierarchies of the past, but in doing so it also weakened our sense of belonging—and it did so without ever answering how this loss might be repaired.
+At its core, modernity gave us freedom, but not connection or guidance. It dismantled the hierarchies of the past, but in doing so it also weakened our sense of belonging—and it did so without ever answering how this loss might be repaired. 
 
 These ideas—the connection between modernity, technology, exploitation, and dominance—will be explored throughout this essay. This is not a rejection of modernity. Modernity has brought immense progress. But without self-reflection and reform, we risk losing the very gains it has delivered.
+
+In the next chapter, we turn to the question of **freedom**—modernity’s most cherished ideal. Modernity understands itself as a project for the liberation of humankind, yet to grasp its deepest shortcomings, we must first examine what liberty truly means.  
