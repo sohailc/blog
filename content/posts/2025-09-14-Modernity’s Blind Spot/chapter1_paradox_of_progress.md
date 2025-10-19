@@ -24,8 +24,10 @@ These assumptions are embedded in our policies, cultures, and systems. And those
 
 ![What is progress?](./paradox_of_progress.png){.img-float-right style="width:35%"}
 
-At its core, modernity gave us freedom, but not connection or guidance. It dismantled the hierarchies of the past, but in doing so it also weakened our sense of belonging—and it did so without ever answering how this loss might be repaired. 
+At its core, modernity gave us freedom, but not connection or guidance. It dismantled the hierarchies of the past, but in doing so it also weakened our sense of belonging—and it did so without ever answering how that loss might be repaired.
 
-These ideas—the connection between modernity, technology, exploitation, and dominance—will be explored throughout this essay. This is not a rejection of modernity. Modernity has brought immense progress. But without self-reflection and reform, we risk losing the very gains it has delivered.
+These ideas—the connection between modernity, technology, exploitation, and dominance—will be explored throughout this essay. This is not a rejection of modernity; it has brought immense progress. But without self-reflection and reform, we risk losing the very gains it has delivered.
 
-In the next chapter, we turn to the question of **freedom**—modernity’s most cherished ideal. Modernity understands itself as a project for the liberation of humankind, yet to grasp its deepest shortcomings, we must first examine what liberty truly means.  
+That self-reflection, I will argue, requires more than institutional reform—it demands a renewal of meaning. We must reopen public discourse to the subjective dimensions of life: questions of purpose, belonging, and value. A genuinely reasoned debate about these matters is only possible if we recognize that subjectivity is not the enemy of reason, but one of its vital partners.
+
+In the next chapter, we turn to the question of freedom—modernity’s most cherished ideal. Modernity understands itself as a project for the liberation of humankind, yet to grasp its deepest shortcomings, we must first examine what liberty truly means.
