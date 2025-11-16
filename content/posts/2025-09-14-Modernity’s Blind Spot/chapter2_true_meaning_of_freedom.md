@@ -14,7 +14,7 @@ If today we are finding that our country is slipping into tyranny it is because 
 
 ## Founding fathers: Liberty without virtue is no liberty at all 
 
-For the American Founding Fathers, who were steeped in both Enlightenment and classical philosophy, liberty unmoored from virtue becomes self-destructive. As **John Adams** put it bluntly, liberty requires self-restraint, or it devours itself. In his thought, self-government requires restraint by the powerful lest it devolve into tyranny. He wrote: 
+For the American Founding Fathers, who were steeped in both Enlightenment and classical philosophy, liberty unmoored from virtue becomes self-destructive. As **John Adams** put it bluntly, liberty requires self-restraint, or it devours itself. He wrote: 
 
 > “The only foundation of a free Constitution is pure Virtue, and if this cannot be inspired into our People in a greater Measure than they have it now, They may change their Rulers and the forms of Government, but they will not obtain a lasting Liberty.”
 >
@@ -34,25 +34,26 @@ Madison, as one of the Constitution’s chief architects and a leading Federalis
 
 What, then, were the civic virtues the Founding Fathers were referring to? First and foremost, they emphasized self-restraint—especially among those with power. Just because one can do something does not mean one should. Liberty does not equal license, and might does not equal right. Freedom, in their view, required the moral discipline to restrain selfish impulses and act in service of the common good.
 
-Equally vital was the duty to stand up for what is just and to protect the weak from the powerful. A free people must not only refrain from wrongdoing but also actively defend what is right. Perhaps it is no coincidence that modern fairy tales of superheroes were born in America: figures who use their power not for domination, but for protection. These ideals—self-restraint, justice, and the defense of the vulnerable—are, in truth, more American than apple pie.
+Equally vital is the duty to stand up for what is just and to protect the weak from the powerful. A free people must not only refrain from wrongdoing but also actively defend what is right. For when injustice is tolerated against one, it soon emboldens wrongdoers to turn their arrows on all. Perhaps it is no coincidence that modern fairy tales of superheroes were born in America: figures who use their power not for domination, but for protection. These ideals—self-restraint, justice, and the defense of the vulnerable—are, in truth, more American than apple pie.
 
 Early America understood freedom as inseparable from responsibility. Care for the poor was not a right but a duty — one grounded in moral conscience rather than state mandate. Citizens felt answerable not only to their neighbors but to their own sense of virtue. The French observer **Alexis de Tocqueville**, writing in the 1830s, was struck by this civic spirit. He marveled that:
 
 > “Americans of all ages, all conditions, all minds, constantly unite. … They make great and real sacrifices to the public welfare.”
+> 
 > — Democracy in America, 1835
 
 For Tocqueville, the strength of American democracy lay not in its laws but in its habits of the heart — the moral and religious sensibilities that moved citizens to act for the common good. These voluntary associations, born of conscience rather than compulsion, filled the space between individual and state.
 
-Yet this virtue-based safety net also excluded many; it depended on belonging. Those deemed outside the moral community — the enslaved, Indigenous peoples, immigrants — were left unprotected. In time, however, as society grew wealthier and more complex modernity’s expansion of rights would universalize compassion — extending it far beyond one’s town or creed — but at the cost of severing it from virtue. What was once a moral duty of citizens became an administrative function of the state. The heart yielded to bureaucracy.
+Yet this virtue-based safety net also excluded many; it depended on belonging. Those deemed outside the moral community — the enslaved, Indigenous peoples, immigrants — were left unprotected. In time, however, as society grew wealthier and more complex, modernity’s expansion of rights would universalize compassion — extending it far beyond one’s town or creed — but at the cost of severing it from virtue. What was once a moral duty of citizens became an administrative function of the state. The heart yielded to bureaucracy.
 
 ## The Inner dimension of Freedom 
 
 If virtue is the foundation of freedom, it is because being enslaved to one’s passions is no freedom at all. A person ruled by greed, anger, or vanity may appear free in the political sense, but inwardly they are captive to impulse. Consider addiction: no law restrains the addict, yet no one would call them free. The bottle, the screen, or the craving commands them more absolutely than any tyrant could. The same logic applies, in subtler ways, to all forms of ungoverned desire. True liberty is not the license to do as one pleases, but the strength to master what pleases us. It begins within — in the discipline of self-knowledge and the quiet conquest of one’s own lower impulses.
 
-This insight is not unique to the Enlightenment or the American tradition. It echoes across spiritual and philosophical lineages:
+This insight is not unique to the Enlightenment or the American tradition. It echoes across spiritual and philosophical lineages.
 
-* Christianity: “You will know the truth, and the truth will set you free” (John 8:32). Freedom here is inseparable from truth — and truth requires discipline, humility, and integrity.
-* Ancient Greece: The Delphic injunction “Know thyself” was not a slogan of self-expression, but of self-understanding — the wisdom that precedes freedom.
-* Islamic tradition: **Imam Ali** taught, “The strongest man is he who conquers himself,” and “Your greatest enemy is your own soul which lies between your two sides.” For him, as for the Stoics or early Christians, the struggle for freedom was above all a struggle against inner tyranny.
+In Christianity, we read in the Bible: “You will know the truth, and the truth will set you free” (John 8:32). Knowledge of the truth is fundamental for freedom to be meaningful. Without truth—without a clear understanding of ourselves and the world—we can only react, not act freely. Similarly, the ancient Greek injunction to “Know thyself” was not a slogan of self-expression but a call to self-understanding: freedom is hollow if we do not grasp what our own interests are or how they relate to the interests of others. In the Islamic tradition, mastery over one’s lower impulses (nafs) is likewise seen as essential to the liberation of the soul. This liberation comes through spiritual enlightenment—seeing clearly the true nature of ourselves, our society, and the natural world. In the Indic traditions, too, liberation (moksha) arises through knowledge, ethical action, and detachment—an inner freedom that mirrors and completes the outer freedom sought in social life.
 
 Across these traditions, freedom and virtue are two faces of the same coin: both aim to align the human being with what is true, good, and just. Without that inner alignment, outer liberty decays into license.
+
+In the next chapter we will explore how these abstract ideas led to the erosion of liberty in practice in the United States. Too often what people mean with freedom is the freedom to persuit material self-interest. We will show how this lead to less liberty, not more! 
