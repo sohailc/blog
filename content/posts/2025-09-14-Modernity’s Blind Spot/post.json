@@ -3,22 +3,25 @@
   "title": "Modernity's Blind Spot: Why Meaning Matters in Public Life",
   "date": "2025-09-15",
   "tags": ["series"],
-  "toc": true,   
+  "toc": true,
 
   "sections": [
     { "type": "markdown", "file": "chapter1_paradox_of_progress.md",
       "title": "Chapter I · Paradox of Progress" },
 
-    { "type": "markdown", "file": "chapter2_contradiction_of_modernity.md",
-      "title": "Chapter II · Contradiction of Modernity" }, 
+    { "type": "markdown", "file": "chapter2_true_meaning_of_freedom.md",
+        "title": "Chapter II · The True Meaning of Freedom" }
 
-    { "type": "markdown", "file": "chapter3_denizens_adrift_disconnection_in_the_modern_world.md",
-      "title": "Chapter III: Denizens Adrift – Disconnection in the Modern World" },
-    
-    {"type": "markdown", "file": "chapter4_the_burden_of_enlightenment.md",
-     "title": "Chapter IV: The Burden of Enlightenment"}, 
+    { "type": "markdown", "file": "chapter3_contradiction_of_modernity.md",
+      "title": "Chapter III · Contradiction of Modernity" },
 
-    {"type": "markdown", "file": "chapter5_towards_a_spiritual_modernism.md", 
-     "title": "Chapter V: Towards a Spiritual Modernism"}
+    { "type": "markdown", "file": "chapter4_denizens_adrift_disconnection_in_the_modern_world.md",
+      "title": "Chapter IV: Denizens Adrift – Disconnection in the Modern World" },
+
+    {"type": "markdown", "file": "chapter5_the_burden_of_enlightenment.md",
+     "title": "Chapter V: The Burden of Enlightenment"},
+
+    {"type": "markdown", "file": "chapter6_towards_a_spiritual_modernism.md",
+     "title": "Chapter VI: Towards a Spiritual Modernism"}
   ]
 }
